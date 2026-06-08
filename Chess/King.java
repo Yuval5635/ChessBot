@@ -1,5 +1,7 @@
 public class King extends Piece{
-    public King(){
-        super();
+    
+    public King(int color, int square) {
+        super(color, square);
     }
+    
 }
