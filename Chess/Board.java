@@ -18,4 +18,8 @@ public class Board {
         return board[square] == null;
     }
 
+    public int getColor(int square){
+        return board[square].getColor();
+    }
+
 }
