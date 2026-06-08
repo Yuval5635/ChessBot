@@ -14,8 +14,12 @@ public class Board {
         this.board = new Piece[]{new Rook(1, 0), new Knight(1, 1)};
     }
 
+    public void resetBoard(){
+        instance = new Board();
+    }
+
     public boolean isOccupy(int square){
-        return board[square] == null;
+        return board[square] != null;
     }
 
     public int getColor(int square){
