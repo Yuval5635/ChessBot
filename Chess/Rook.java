@@ -31,6 +31,15 @@ public class Rook extends Piece{
         }
 
         int[] validMoves = new int[numOfValidMoves];
+
+        int indexer = 0;
+        for (int i = 0; i < 64; i++){
+            if(isMoves[i]){
+                validMoves[indexer] = i;
+                indexer++;
+            }
+        }
+
         return validMoves;
     }
 
