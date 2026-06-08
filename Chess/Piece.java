@@ -1,4 +1,4 @@
-public class Piece {
+public abstract class Piece {
 
     protected int color;
     protected int square;
@@ -20,4 +20,5 @@ public class Piece {
         this.square = square;
     }
 
+    public abstract int[] getMoves();
 }
