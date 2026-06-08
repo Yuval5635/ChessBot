@@ -10,15 +10,15 @@ public class Rook extends Piece{
 
         for (int i = -1; i < 2; i += 2){
             for (int j = i; true; j += i){
-                if (isValidRow(j)){
-                    isMoves[(j * 8) + this.square] = true;
+                if (isValidMove(j, 0)){
+                    isMoves[this.square + (j * 8)] = true;
                 } else{
                     break;
                 }
             }
             for (int j = i; true; j += i){
-                if (isValidCol(j)){
-                    isMoves[j + this.square] = true;
+                if (isValidMove(0, j)){
+                    isMoves[this.square + j] = true;
                 } else{
                     break;
                 }
@@ -41,15 +41,5 @@ public class Rook extends Piece{
         }
 
         return validMoves;
-    }
-
-    private boolean isValidRow(int rowOffset){
-        int row = rowOffset + (this.square / 8);
-        return row < 8 && row >= 0 && (! Board.getInstance().isOccupy(row + this.square % 8));
-    }
-
-    private boolean isValidCol(int colOffset){
-        int col = colOffset + (this.square % 8);
-        return col < 8 && col >= 0 && (! Board.getInstance().isOccupy(col + this.square / 8));
     }
 }
