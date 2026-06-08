@@ -22,4 +22,25 @@ public class Board {
         return board[square].getColor();
     }
 
+    public Piece getSquare(int square){
+        return board[square];
+    }
+
+    public boolean movePiece(int fromSquare, int toSquare){
+        Piece piece = board[fromSquare];
+        if (piece == null) return false;
+        for (int move : piece.getMoves()){
+            if (move == toSquare){
+                movePiece(piece, toSquare);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void movePiece(Piece piece, int toSquare){
+        board[toSquare] = piece;
+        board[piece.getSquare()] = null;
+        piece.moveTo(toSquare);
+    }
 }
