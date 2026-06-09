@@ -46,5 +46,10 @@ public class Board {
         board[toSquare] = piece;
         board[piece.getSquare()] = null;
         piece.moveTo(toSquare);
+        if(piece instanceof Pawn){
+            if ((toSquare / 8 == 0 && piece.getColor() == 1) || (toSquare / 8 == 7 && piece.getColor() == -1)){
+                board[toSquare] = new Queen(piece.getColor(), toSquare);
+            }
+        }
     }
 }
