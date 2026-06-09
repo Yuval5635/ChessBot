@@ -7,7 +7,7 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public int[] getMoves() {
+    public Move[] getMoves() {
         boolean[] isMoves = new boolean[64];
 
         int direction = this.color;
@@ -34,12 +34,12 @@ public class Pawn extends Piece{
             if (isMove) numOfValidMoves++;
         }
 
-        int[] validMoves = new int[numOfValidMoves];
+        Move[] validMoves = new Move[numOfValidMoves];
 
         int indexer = 0;
         for (int i = 0; i < 64; i++){
             if(isMoves[i]){
-                validMoves[indexer] = i;
+                validMoves[indexer] = new Move(this.square, i);
                 indexer++;
             }
         }
@@ -58,5 +58,10 @@ public class Pawn extends Piece{
         int row = (this.square / 8) + rowOffset;
         int col = (this.square % 8) + colOffset;
         return row < 8 && row >= 0 && col < 8 && col >= 0 && this.board.isOccupy(row * 8 + col) && this.board.getColor(row * 8 + col) != this.color;
+    }
+
+    @Override
+    public Piece copy(Board newBoard) {
+        return new Pawn(this.color, this.square, newBoard);
     }
 }

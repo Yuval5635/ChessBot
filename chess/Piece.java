@@ -30,5 +30,7 @@ public abstract class Piece {
         return row < 8 && row >= 0 && col < 8 && col >= 0 && ((! this.board.isOccupy(row * 8 + col)) || this.board.getColor(row * 8 + col) != this.color);
     }
 
-    public abstract int[] getMoves();
+    public abstract Move[] getMoves();
+
+    public abstract Piece copy(Board newBoard);
 }

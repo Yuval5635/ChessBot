@@ -10,6 +10,11 @@ public class Game {
         this.board = new Board();
     }
 
+    public Game(Game other){
+        this.isWhiteTurn = other.isWhiteTurn;
+        this.board = new Board(other.board);
+    }
+
     public void resetGame(){
         this.board.resetBoard();
         this.isWhiteTurn = true;
@@ -31,17 +36,17 @@ public class Game {
         else return 0;
     }
 
-    private boolean move(int fromSquare, int toSquare){
-        if (this.board.movePiece(fromSquare, toSquare)){
+    private boolean move(Move move){
+        if (this.board.movePiece(move)){
             this.isWhiteTurn = !this.isWhiteTurn;
             return true;
         }
         return false;
     }
 
-    public boolean turn(int fromSquare, int toSquare){
-        if (this.board.isOccupy(fromSquare) && this.board.getColor(fromSquare) == (this.isWhiteTurn ? 1 : -1)){
-            if (move(fromSquare, toSquare)) {
+    public boolean turn(Move move){
+        if (this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? 1 : -1)){
+            if (move(move)) {
                 return isWin() != 0;
             }
         }
@@ -52,11 +57,15 @@ public class Game {
         return this.isWhiteTurn;
     }
 
-    public int getNumOfMoves(int color){
-        return this.board.getAllMoves(color).length;
+    public int getNumOfMoves(){
+        return this.board.getAllMoves(this.isWhiteTurn ? 1 : -1).length;
     }
 
-    public int[] getAllMoves(int color){
-        return this.board.getAllMoves(color);
+    public Move[] getAllMoves(){
+        return this.board.getAllMoves(this.isWhiteTurn ? 1 : -1);
+    }
+
+    public Board getBoard() {
+        return this.board;
     }
 }

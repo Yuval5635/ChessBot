@@ -7,7 +7,7 @@ public class Rook extends Piece{
     }
 
     @Override
-    public int[] getMoves(){
+    public Move[] getMoves(){
         boolean[] isMoves = new boolean[64];
 
         for (int i = -1; i < 2; i += 2){
@@ -32,16 +32,21 @@ public class Rook extends Piece{
             if (isMove) numOfValidMoves++;
         }
 
-        int[] validMoves = new int[numOfValidMoves];
+        Move[] validMoves = new Move[numOfValidMoves];
 
         int indexer = 0;
         for (int i = 0; i < 64; i++){
             if(isMoves[i]){
-                validMoves[indexer] = i;
+                validMoves[indexer] = new Move(this.square, i);
                 indexer++;
             }
         }
 
         return validMoves;
+    }
+
+    @Override
+    public Piece copy(Board newBoard) {
+        return new Rook(this.color, this.square, newBoard);
     }
 }
