@@ -52,4 +52,24 @@ public class Board {
             }
         }
     }
+
+    public int[] getAllMoves(int color){
+        int numOfMoves = 0;
+        for (Piece piece : board){
+            if (piece != null && piece.getColor() == color) numOfMoves += piece.getMoves().length;
+        }
+
+        int[] allMoves = new int[numOfMoves];
+        int indexer = 0;
+        for (Piece piece : board){
+            if (piece != null && piece.getColor() == color){
+                for (int move : piece.getMoves()){
+                    allMoves[indexer] = move;
+                    indexer++;
+                }
+            }
+        }
+
+        return allMoves;
+    }
 }
