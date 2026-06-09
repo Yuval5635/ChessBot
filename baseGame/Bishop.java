@@ -1,7 +1,9 @@
+package chess;
+
 public class Bishop extends Piece{
 
-    public Bishop(int color, int square) {
-        super(color, square);
+    public Bishop(int color, int square, Board board) {
+        super(color, square, board);
     }
     
     @Override

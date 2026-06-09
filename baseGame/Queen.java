@@ -1,12 +1,26 @@
-public class Rook extends Piece{
+package chess;
 
-    public Rook(int color, int square) {
-        super(color, square);
+public class Queen extends Piece{
+
+    public Queen(int color, int square, Board board) {
+        super(color, square, board);
     }
 
     @Override
-    public int[] getMoves(){
+    public int[] getMoves() {
         boolean[] isMoves = new boolean[64];
+
+        for (int i = -1; i <= 1; i+=2) {
+            for (int j = -1; j <= 1; j+=2) {
+                for (int k = 1; true; k++) {
+                    if (isValidMove(i * k, j * k)) {
+                        isMoves[this.square + ((i * 8) + j) * k] = true;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
 
         for (int i = -1; i < 2; i += 2){
             for (int j = i; true; j += i){

@@ -1,7 +1,9 @@
+package chess;
+
 public class Pawn extends Piece{
 
-    public Pawn(int color, int square) {
-        super(color, square);
+    public Pawn(int color, int square, Board board) {
+        super(color, square, board);
     }
 
     @Override
@@ -49,12 +51,12 @@ public class Pawn extends Piece{
     public boolean isValidMove(int rowOffset, int colOffset) {
         int row = (this.square / 8) + rowOffset;
         int col = (this.square % 8) + colOffset;
-        return row < 8 && row >= 0  && (! Board.getInstance().isOccupy(row * 8 + col));
+        return row < 8 && row >= 0  && (! this.board.isOccupy(row * 8 + col));
     }
 
     public boolean isValidAttack(int rowOffset, int colOffset) {
         int row = (this.square / 8) + rowOffset;
         int col = (this.square % 8) + colOffset;
-        return row < 8 && row >= 0 && col < 8 && col >= 0 && Board.getInstance().isOccupy(row * 8 + col) && Board.getInstance().getColor(row * 8 + col) != this.color;
+        return row < 8 && row >= 0 && col < 8 && col >= 0 && this.board.isOccupy(row * 8 + col) && this.board.getColor(row * 8 + col) != this.color;
     }
 }
