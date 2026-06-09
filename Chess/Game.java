@@ -1,32 +1,25 @@
 public class Game {
 
-    private static Game instance;
-
     private boolean isWhiteTurn;
+    private Board board;
 
-    public static Game getInstance() {
-        if (instance == null) instance = new Game();
-        return instance;
-    }
-
-    private Game() {
+    public Game(){
         this.isWhiteTurn = true;
+        this.board = new Board();
     }
 
     public void resetGame(){
-        instance = new Game();
-        Board.getInstance().resetBoard();
+        this.board.resetBoard();
+        this.isWhiteTurn = true;
     }
 
     public int isWin() {
         boolean whiteKingAlive = false;
         boolean blackKingAlive = false;
 
-        Board board = Board.getInstance();
-
         for (int i = 0; i < 64; i++){
-            if (board.isOccupy(i) && board.getSquare(i) instanceof King){
-                if (board.getColor(i) == 1) whiteKingAlive = true;
+            if (this.board.isOccupy(i) && this.board.getSquare(i) instanceof King){
+                if (this.board.getColor(i) == 1) whiteKingAlive = true;
                 else blackKingAlive = true;
             }
         }
@@ -37,7 +30,7 @@ public class Game {
     }
 
     private boolean move(int fromSquare, int toSquare){
-        if (Board.getInstance().movePiece(fromSquare, toSquare)){
+        if (this.board.movePiece(fromSquare, toSquare)){
             this.isWhiteTurn = !this.isWhiteTurn;
             return true;
         }
@@ -45,7 +38,7 @@ public class Game {
     }
 
     public boolean turn(int fromSquare, int toSquare){
-        if (Board.getInstance().isOccupy(fromSquare) && Board.getInstance().getColor(fromSquare) == (this.isWhiteTurn ? 1 : -1)){
+        if (this.board.isOccupy(fromSquare) && this.board.getColor(fromSquare) == (this.isWhiteTurn ? 1 : -1)){
             if (move(fromSquare, toSquare)) {
                 return isWin() != 0;
             }
@@ -58,10 +51,10 @@ public class Game {
     }
 
     public int getNumOfMoves(int color){
-        return Board.getInstance().getAllMoves(color).length;
+        return this.board.getAllMoves(color).length;
     }
 
     public int[] getAllMoves(int color){
-        return Board.getInstance().getAllMoves(color);
+        return this.board.getAllMoves(color);
     }
 }

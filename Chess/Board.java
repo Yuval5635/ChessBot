@@ -1,16 +1,9 @@
 
 public class Board {
 
-    private static Board instance;
+private Piece[] board;
 
-    private Piece[] board;
-
-    public static Board getInstance() {
-        if (instance == null) instance = new Board();
-        return instance;
-    }
-
-    private Board() {
+    public Board() {
         this.board = new Piece[]{new Rook(1, 0),   new Knight(1, 1),   new Bishop(1, 2),   new Queen(1, 3),   new King(1, 4),   new Bishop(1, 5),   new Knight(1, 6),   new Rook(1, 7),
                                  new Pawn(1, 8),   new Pawn(1, 9),     new Pawn(1, 10),    new Pawn(1, 11),   new Pawn(1, 12),  new Pawn(1, 13),    new Pawn(1, 14),    new Pawn(1, 15),
                                  null,             null,               null,               null,              null,             null,               null,               null,
@@ -20,9 +13,16 @@ public class Board {
                                  new Pawn(-1, 48), new Pawn(-1, 49),   new Pawn(-1, 50),   new Pawn(-1, 51),  new Pawn(-1, 52), new Pawn(-1, 53),   new Pawn(-1, 54),   new Pawn(-1, 55),
                                  new Rook(-1, 56), new Knight(-1, 57), new Bishop(-1, 58), new Queen(-1, 59), new King(-1, 60), new Bishop(-1, 61), new Knight(-1, 62), new Rook(-1, 63)};
     }
-
+    
     public void resetBoard(){
-        instance = new Board();
+        this.board = new Piece[]{new Rook(1, 0),   new Knight(1, 1),   new Bishop(1, 2),   new Queen(1, 3),   new King(1, 4),   new Bishop(1, 5),   new Knight(1, 6),   new Rook(1, 7),
+                                 new Pawn(1, 8),   new Pawn(1, 9),     new Pawn(1, 10),    new Pawn(1, 11),   new Pawn(1, 12),  new Pawn(1, 13),    new Pawn(1, 14),    new Pawn(1, 15),
+                                 null,             null,               null,               null,              null,             null,               null,               null,
+                                 null,             null,               null,               null,              null,             null,               null,               null,
+                                 null,             null,               null,               null,              null,             null,               null,               null,
+                                 null,             null,               null,               null,              null,             null,               null,               null,
+                                 new Pawn(-1, 48), new Pawn(-1, 49),   new Pawn(-1, 50),   new Pawn(-1, 51),  new Pawn(-1, 52), new Pawn(-1, 53),   new Pawn(-1, 54),   new Pawn(-1, 55),
+                                 new Rook(-1, 56), new Knight(-1, 57), new Bishop(-1, 58), new Queen(-1, 59), new King(-1, 60), new Bishop(-1, 61), new Knight(-1, 62), new Rook(-1, 63)};
     }
 
     public boolean isOccupy(int square){
