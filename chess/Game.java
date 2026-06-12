@@ -1,5 +1,7 @@
 package chess;
 
+import utils.Utils;
+
 public class Game {
 
     private boolean isWhiteTurn;
@@ -8,11 +10,6 @@ public class Game {
     public Game(){
         this.isWhiteTurn = true;
         this.board = new Board();
-    }
-
-    public Game(Game other){
-        this.isWhiteTurn = other.isWhiteTurn;
-        this.board = new Board(other.board);
     }
 
     public void resetGame(){
@@ -45,12 +42,16 @@ public class Game {
     }
 
     public boolean turn(Move move){
-        if (this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? 1 : -1)){
+        if (isMoveValid(move)){
             if (move(move)) {
                 return isWin() != 0;
             }
         }
         return false;
+    }
+
+    public boolean isMoveValid(Move move){
+        return this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? 1 : -1) && Utils.findIndex(this.board.getAllMoves(this.board.getColor(move.fromSquare())), move) != -1;
     }
 
     public boolean isWhiteTurn() {
@@ -67,5 +68,10 @@ public class Game {
 
     public Board getBoard() {
         return this.board;
+    }
+
+    public void undoTurn(){
+        this.board.undoMove();
+        this.isWhiteTurn = !this.isWhiteTurn;
     }
 }

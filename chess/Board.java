@@ -1,8 +1,12 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class Board {
 
-private Piece[] board;
+    private Piece[] board;
+    
+    private ArrayList<Move> moves;
 
     public Board() {
         this.board = new Piece[]{new Rook(1, 0, this),   new Knight(1, 1, this),   new Bishop(1, 2, this),   new Queen(1, 3, this),   new King(1, 4, this),   new Bishop(1, 5, this),   new Knight(1, 6, this),   new Rook(1, 7, this),
@@ -13,15 +17,7 @@ private Piece[] board;
                                  null, null, null, null, null, null, null, null,
                                  new Pawn(-1, 48, this), new Pawn(-1, 49, this),   new Pawn(-1, 50, this),   new Pawn(-1, 51, this),  new Pawn(-1, 52, this), new Pawn(-1, 53, this),   new Pawn(-1, 54, this),   new Pawn(-1, 55, this),
                                  new Rook(-1, 56, this), new Knight(-1, 57, this), new Bishop(-1, 58, this), new Queen(-1, 59, this), new King(-1, 60, this), new Bishop(-1, 61, this), new Knight(-1, 62, this), new Rook(-1, 63, this)};
-    }
-
-    public Board(Board other) {
-        this.board = new Piece[64];
-        for (int i = 0; i < 64; i++) {
-            if (other.board[i] != null) {
-                this.board[i] = other.board[i].copy(this);
-            }
-        }
+        moves = new ArrayList<Move>();
     }
     
     public void resetBoard(){
@@ -48,15 +44,25 @@ private Piece[] board;
     }
 
     public boolean movePiece(Move move){
+        moves.add(move);
         Piece piece = this.board[move.fromSquare()];
         if (piece == null) return false;
         for (Move m : piece.getMoves()){
             if (m.toSquare() == move.toSquare()){
+                
                 movePiece(piece, move.toSquare());
                 return true;
             }
         }
         return false;
+    }
+
+    public void undoMove(){
+        resetBoard();
+        moves.remove(moves.size() - 1);
+        for (Move move : moves){
+            movePiece(getSquare(move.fromSquare()), move.toSquare());
+        }
     }
 
     private void movePiece(Piece piece, int toSquare){
@@ -71,22 +77,25 @@ private Piece[] board;
     }
 
     public Move[] getAllMoves(int color){
-        int numOfMoves = 0;
-        for (Piece piece : this.board){
-            if (piece != null && piece.getColor() == color) numOfMoves += piece.getMoves().length;
-        }
+        Move[] allMoves = new Move[4096];
+        int index = 0;
 
-        Move[] allMoves = new Move[numOfMoves];
-        int indexer = 0;
-        for (Piece piece : this.board){
-            if (piece != null && piece.getColor() == color){
-                for (Move move : piece.getMoves()){
-                    allMoves[indexer] = move;
-                    indexer++;
+        for (int i = 0; i < 64; i++){
+            if (this.isOccupy(i) && this.getColor(i) == color){
+                Move[] pieceMoves = this.getSquare(i).getMoves();
+                for (Move pieceMove : pieceMoves){
+                    allMoves[index] = pieceMove;
+                    index++;
                 }
             }
         }
 
-        return allMoves;
+        Move[] allValidMoves = new Move[index];
+
+        for (int i = 0; i < allValidMoves.length; i++){
+            allValidMoves[i] = allMoves[i];
+        }
+
+        return allValidMoves;
     }
 }

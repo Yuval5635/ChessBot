@@ -24,7 +24,6 @@ public class ChessBot{
         Move[] moves = game.getAllMoves();
 
         for (Move move : moves) {
-            game = new Game(this.game); // Create a new game instance to simulate the move
             if (game.turn(move)) { // Make the move
                 int score = -miniMax(depth - 1, -beta, -alpha, game); // Recurse with reduced depth and inverted alpha-beta values
 
@@ -35,6 +34,7 @@ public class ChessBot{
                     break; // Beta cut-off
                 }
             }
+            game.undoTurn();
         }
 
         return bestScore;
@@ -57,12 +57,12 @@ public class ChessBot{
     }
 
     private int getPieceValue(Object piece) {
-        if (piece instanceof chess.Pawn) return 1;
-        if (piece instanceof chess.Knight) return 3;
-        if (piece instanceof chess.Bishop) return 3;
-        if (piece instanceof chess.Rook) return 5;
-        if (piece instanceof chess.Queen) return 9;
-        if (piece instanceof chess.King) return 1000; // Arbitrary high value for the king
+        if (piece instanceof chess.Pawn) return 100;
+        if (piece instanceof chess.Knight) return 320;
+        if (piece instanceof chess.Bishop) return 330;
+        if (piece instanceof chess.Rook) return 500;
+        if (piece instanceof chess.Queen) return 900;
+        if (piece instanceof chess.King) return 10000; // Arbitrary high value for the king
         return 0;
     }
 
