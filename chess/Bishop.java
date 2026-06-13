@@ -2,8 +2,8 @@ package chess;
 
 public class Bishop extends Piece{
 
-    public Bishop(int color, int square, Board board) {
-        super(color, square, board);
+    public Bishop(int color, int square, Board board, char name) {
+        super(color, square, board, name);
     }
     
     @Override
@@ -42,6 +42,6 @@ public class Bishop extends Piece{
 
     @Override
     public Piece copy(Board newBoard) {
-        return new Bishop(this.color, this.square, newBoard);
+        return new Bishop(this.color, this.square, newBoard, this.name);
     }
 }

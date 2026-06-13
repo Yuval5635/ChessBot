@@ -50,7 +50,7 @@ public class Game {
         return false;
     }
 
-    public boolean isMoveValid(Move move){
+    private boolean isMoveValid(Move move){
         return this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? 1 : -1) && Utils.findIndex(this.board.getAllMoves(this.board.getColor(move.fromSquare())), move) != -1;
     }
 
@@ -73,5 +73,9 @@ public class Game {
     public void undoTurn(){
         this.board.undoMove();
         this.isWhiteTurn = !this.isWhiteTurn;
+    }
+
+    public void printBoard(){
+        this.board.printBoard();
     }
 }

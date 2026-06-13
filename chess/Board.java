@@ -9,26 +9,26 @@ public class Board {
     private ArrayList<Move> moves;
 
     public Board() {
-        this.board = new Piece[]{new Rook(1, 0, this),   new Knight(1, 1, this),   new Bishop(1, 2, this),   new Queen(1, 3, this),   new King(1, 4, this),   new Bishop(1, 5, this),   new Knight(1, 6, this),   new Rook(1, 7, this),
-                                 new Pawn(1, 8, this),   new Pawn(1, 9, this),     new Pawn(1, 10, this),    new Pawn(1, 11, this),   new Pawn(1, 12, this),  new Pawn(1, 13, this),    new Pawn(1, 14, this),    new Pawn(1, 15, this),
+        this.board = new Piece[]{new Rook(1, 0, this, 'R'),   new Knight(1, 1, this, 'N'),   new Bishop(1, 2, this, 'B'),   new Queen(1, 3, this, 'Q'),   new King(1, 4, this, 'K'),   new Bishop(1, 5, this, 'B'),   new Knight(1, 6, this, 'N'),   new Rook(1, 7, this, 'R'),
+                                 new Pawn(1, 8, this, 'P'),   new Pawn(1, 9, this, 'P'),     new Pawn(1, 10, this, 'P'),    new Pawn(1, 11, this, 'P'),   new Pawn(1, 12, this, 'P'),  new Pawn(1, 13, this, 'P'),    new Pawn(1, 14, this, 'P'),    new Pawn(1, 15, this, 'P'),
                                  null, null, null, null, null, null, null, null,
                                  null, null, null, null, null, null, null, null,
                                  null, null, null, null, null, null, null, null,
                                  null, null, null, null, null, null, null, null,
-                                 new Pawn(-1, 48, this), new Pawn(-1, 49, this),   new Pawn(-1, 50, this),   new Pawn(-1, 51, this),  new Pawn(-1, 52, this), new Pawn(-1, 53, this),   new Pawn(-1, 54, this),   new Pawn(-1, 55, this),
-                                 new Rook(-1, 56, this), new Knight(-1, 57, this), new Bishop(-1, 58, this), new Queen(-1, 59, this), new King(-1, 60, this), new Bishop(-1, 61, this), new Knight(-1, 62, this), new Rook(-1, 63, this)};
+                                 new Pawn(-1, 48, this, 'p'), new Pawn(-1, 49, this, 'p'),   new Pawn(-1, 50, this, 'p'),   new Pawn(-1, 51, this, 'p'),  new Pawn(-1, 52, this, 'p'), new Pawn(-1, 53, this, 'p'),   new Pawn(-1, 54, this, 'p'),   new Pawn(-1, 55, this, 'p'),
+                                 new Rook(-1, 56, this, 'r'), new Knight(-1, 57, this, 'n'), new Bishop(-1, 58, this, 'b'), new Queen(-1, 59, this, 'q'), new King(-1, 60, this, 'k'), new Bishop(-1, 61, this, 'b'), new Knight(-1, 62, this, 'n'), new Rook(-1, 63, this, 'r')};
         moves = new ArrayList<Move>();
     }
     
     public void resetBoard(){
-        this.board = new Piece[]{new Rook(1, 0, this),   new Knight(1, 1, this),   new Bishop(1, 2, this),   new Queen(1, 3, this),   new King(1, 4, this),   new Bishop(1, 5, this),   new Knight(1, 6, this),   new Rook(1, 7, this),
-                                 new Pawn(1, 8, this),   new Pawn(1, 9, this),     new Pawn(1, 10, this),    new Pawn(1, 11, this),   new Pawn(1, 12, this),  new Pawn(1, 13, this),    new Pawn(1, 14, this),    new Pawn(1, 15, this),
+        this.board = new Piece[]{new Rook(1, 0, this, 'R'),   new Knight(1, 1, this, 'N'),   new Bishop(1, 2, this, 'B'),   new Queen(1, 3, this, 'Q'),   new King(1, 4, this, 'K'),   new Bishop(1, 5, this, 'B'),   new Knight(1, 6, this, 'N'),   new Rook(1, 7, this, 'R'),
+                                 new Pawn(1, 8, this, 'P'),   new Pawn(1, 9, this, 'P'),     new Pawn(1, 10, this, 'P'),    new Pawn(1, 11, this, 'P'),   new Pawn(1, 12, this, 'P'),  new Pawn(1, 13, this, 'P'),    new Pawn(1, 14, this, 'P'),    new Pawn(1, 15, this, 'P'),
                                  null, null, null, null, null, null, null, null,
                                  null, null, null, null, null, null, null, null,
                                  null, null, null, null, null, null, null, null,
                                  null, null, null, null, null, null, null, null,
-                                 new Pawn(-1, 48, this), new Pawn(-1, 49, this),   new Pawn(-1, 50, this),   new Pawn(-1, 51, this),  new Pawn(-1, 52, this), new Pawn(-1, 53, this),   new Pawn(-1, 54, this),   new Pawn(-1, 55, this),
-                                 new Rook(-1, 56, this), new Knight(-1, 57, this), new Bishop(-1, 58, this), new Queen(-1, 59, this), new King(-1, 60, this), new Bishop(-1, 61, this), new Knight(-1, 62, this), new Rook(-1, 63, this)};
+                                 new Pawn(-1, 48, this, 'p'), new Pawn(-1, 49, this, 'p'),   new Pawn(-1, 50, this, 'p'),   new Pawn(-1, 51, this, 'p'),  new Pawn(-1, 52, this, 'p'), new Pawn(-1, 53, this, 'p'),   new Pawn(-1, 54, this, 'p'),   new Pawn(-1, 55, this, 'p'),
+                                 new Rook(-1, 56, this, 'r'), new Knight(-1, 57, this, 'n'), new Bishop(-1, 58, this, 'b'), new Queen(-1, 59, this, 'q'), new King(-1, 60, this, 'k'), new Bishop(-1, 61, this, 'b'), new Knight(-1, 62, this, 'n'), new Rook(-1, 63, this, 'r')};
     }
 
     public boolean isOccupy(int square){
@@ -71,7 +71,7 @@ public class Board {
         piece.moveTo(toSquare);
         if(piece instanceof Pawn){
             if ((toSquare / 8 == 0 && piece.getColor() == 1) || (toSquare / 8 == 7 && piece.getColor() == -1)){
-                this.board[toSquare] = new Queen(piece.getColor(), toSquare, this);
+                this.board[toSquare] = new Queen(piece.getColor(), toSquare, this, piece.getColor() == 1 ? 'Q' : 'q');
             }
         }
     }
@@ -95,7 +95,18 @@ public class Board {
         for (int i = 0; i < allValidMoves.length; i++){
             allValidMoves[i] = allMoves[i];
         }
-
+        
         return allValidMoves;
+    }
+
+    public void printBoard(){
+        for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				System.out.print("" + ((board[8 * row + col] == null) ? " " : (board[8 * row + col].getName())));
+				if (col < 7) System.out.print("|");
+			}
+			System.out.println();
+			if (row < 7) System.out.println("-+-+-+-+-+-+-+-");
+		}
     }
 }

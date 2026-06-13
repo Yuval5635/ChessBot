@@ -2,8 +2,8 @@ package chess;
 
 public class Rook extends Piece{
 
-    public Rook(int color, int square, Board board) {
-        super(color, square, board);
+    public Rook(int color, int square, Board board, char name) {
+        super(color, square, board, name);
     }
 
     @Override
@@ -47,6 +47,6 @@ public class Rook extends Piece{
 
     @Override
     public Piece copy(Board newBoard) {
-        return new Rook(this.color, this.square, newBoard);
+        return new Rook(this.color, this.square, newBoard, this.name);
     }
 }

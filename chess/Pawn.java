@@ -2,8 +2,8 @@ package chess;
 
 public class Pawn extends Piece{
 
-    public Pawn(int color, int square, Board board) {
-        super(color, square, board);
+    public Pawn(int color, int square, Board board, char name) {
+        super(color, square, board, name);
     }
 
     @Override
@@ -62,6 +62,6 @@ public class Pawn extends Piece{
 
     @Override
     public Piece copy(Board newBoard) {
-        return new Pawn(this.color, this.square, newBoard);
+        return new Pawn(this.color, this.square, newBoard, this.name);
     }
 }

@@ -5,11 +5,13 @@ public abstract class Piece {
     protected int color;
     protected int square;
     protected Board board;
+    protected char name;
 
-    protected Piece(int color, int square, Board board) {
+    protected Piece(int color, int square, Board board, char name) {
         this.color = color;
         this.square = square;
         this.board = board;
+        this.name = name;
     }
 
     public int getSquare(){
@@ -18,6 +20,10 @@ public abstract class Piece {
 
     public int getColor(){
         return this.color;
+    }
+
+    public char getName(){
+        return this.name;
     }
 
     public void moveTo(int square){
