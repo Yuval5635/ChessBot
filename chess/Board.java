@@ -70,7 +70,7 @@ public class Board {
         this.board[piece.getSquare()] = null;
         piece.moveTo(toSquare);
         if(piece instanceof Pawn){
-            if ((toSquare / 8 == 0 && piece.getColor() == 1) || (toSquare / 8 == 7 && piece.getColor() == -1)){
+            if ((toSquare / 8 == 0 && piece.getColor() == -1) || (toSquare / 8 == 7 && piece.getColor() == 1)){
                 this.board[toSquare] = new Queen(piece.getColor(), toSquare, this, piece.getColor() == 1 ? 'Q' : 'q');
             }
         }
@@ -95,7 +95,7 @@ public class Board {
         for (int i = 0; i < allValidMoves.length; i++){
             allValidMoves[i] = allMoves[i];
         }
-        
+
         return allValidMoves;
     }
 

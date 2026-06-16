@@ -14,6 +14,9 @@ public class Rook extends Piece{
             for (int j = i; true; j += i){
                 if (isValidMove(j, 0)){
                     isMoves[this.square + (j * 8)] = true;
+                    if (this.board.isOccupy(j * 8 + this.square)){
+                        break;
+                    }
                 } else{
                     break;
                 }
@@ -21,6 +24,9 @@ public class Rook extends Piece{
             for (int j = i; true; j += i){
                 if (isValidMove(0, j)){
                     isMoves[this.square + j] = true;
+                    if (this.board.isOccupy(j + this.square)){
+                        break;
+                    }
                 } else{
                     break;
                 }

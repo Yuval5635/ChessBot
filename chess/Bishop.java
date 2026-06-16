@@ -15,6 +15,9 @@ public class Bishop extends Piece{
                 for (int k = 1; true; k++) {
                     if (isValidMove(i * k, j * k)) {
                         isMoves[this.square + ((i * 8) + j) * k] = true;
+                        if (this.board.isOccupy(this.square + ((i * 8) + j) * k)){
+                            break;
+                        }
                     } else {
                         break;
                     }

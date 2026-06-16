@@ -15,6 +15,9 @@ public class Queen extends Piece{
                 for (int k = 1; true; k++) {
                     if (isValidMove(i * k, j * k)) {
                         isMoves[this.square + ((i * 8) + j) * k] = true;
+                        if (this.board.isOccupy(this.square + ((i * 8) + j) * k)){
+                            break;
+                        }
                     } else {
                         break;
                     }
@@ -26,6 +29,9 @@ public class Queen extends Piece{
             for (int j = i; true; j += i){
                 if (isValidMove(j, 0)){
                     isMoves[this.square + (j * 8)] = true;
+                    if (this.board.isOccupy(j * 8 + this.square)){
+                        break;
+                    }
                 } else{
                     break;
                 }
@@ -33,6 +39,9 @@ public class Queen extends Piece{
             for (int j = i; true; j += i){
                 if (isValidMove(0, j)){
                     isMoves[this.square + j] = true;
+                    if (this.board.isOccupy(j + this.square)){
+                        break;
+                    }
                 } else{
                     break;
                 }
