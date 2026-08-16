@@ -30,5 +30,6 @@ public class Main{
             chessBot.turn();
 
         }
+        scanner.close();
     }
 }
