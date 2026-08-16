@@ -95,14 +95,14 @@ public class ChessBot{
         int score = 0;
 
         for (int i = 0; i < 64; i++){
-            score += PST.getPSTValue(game.getBoard().getSquare(i), phase) * (this.game.isWhiteTurn() ? 1 : -1);
+            score += PST.getPSTValue(game.getBoard().getSquare(i), phase) * (this.game.isWhiteTurn() ? -1 : 1);
         }
 
         return score;
     }
 
     private int getNumMovesValue(){
-        return this.game.getAllMoves().length * (this.game.isWhiteTurn() ? 1 : -1);
+        return this.game.getAllMoves().length * (this.game.isWhiteTurn() ? -1 : 1);
     }
 
     private int getPieceValue(int square) {
@@ -127,7 +127,8 @@ public class ChessBot{
     }
 
     private int mgScore(int phase) {
-        int score = getAllPieceValue();
+        int score = 0;
+        score += getAllPieceValue();
         score += getAllPSTValue(phase);
         score += getNumMovesValue() * 10;
 
@@ -135,7 +136,8 @@ public class ChessBot{
     }
 
     private int egScore(int phase) {
-        int score = getAllPieceValue();
+        int score = 0;
+        score += getAllPieceValue();
         score += getAllPSTValue(phase);
         score += getNumMovesValue() * 5;
 

@@ -2,8 +2,11 @@ package chess;
 
 public class Rook extends Piece{
 
+    boolean isMoved;
+
     public Rook(int color, int square, Board board, char name) {
         super(color, square, board, name);
+        this.isMoved = false;
     }
 
     @Override
@@ -49,6 +52,16 @@ public class Rook extends Piece{
         }
 
         return validMoves;
+    }
+
+    public boolean isMoved() {
+        return isMoved;
+    }
+
+    @Override
+    public void moveTo(int square) {
+        super.moveTo(square);
+        this.isMoved = true;
     }
 
     @Override

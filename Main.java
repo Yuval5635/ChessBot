@@ -6,7 +6,7 @@ import minimaxBot.ChessBot;
 public class Main{
     public static void main(String[] args) {
         Game game = new Game();
-        ChessBot chessBot = new ChessBot(game, 7);
+        ChessBot chessBot = new ChessBot(game, 4);
         Scanner scanner = new Scanner(System.in);
 
         while (game.isWin() == 0){

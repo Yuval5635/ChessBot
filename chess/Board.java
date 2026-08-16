@@ -74,6 +74,15 @@ public class Board {
                 this.board[toSquare] = new Queen(piece.getColor(), toSquare, this, piece.getColor() == 1 ? 'Q' : 'q');
             }
         }
+        if(piece instanceof King){
+            if (((King)piece).canCastle(toSquare)){
+                if (toSquare == 2){
+                    movePiece(this.board[0], 3);
+                } else if (toSquare == 6){
+                    movePiece(this.board[7], 5);
+                }
+            }
+        }
     }
 
     public Move[] getAllMoves(int color){
