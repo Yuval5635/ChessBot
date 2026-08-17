@@ -1,6 +1,4 @@
-import chess.Board;
-import chess.Game;
-import chess.Move;
+package chess;
 
 import java.util.Scanner;
 import minimaxBot.ChessBot;

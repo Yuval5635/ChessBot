@@ -17,18 +17,25 @@ if os.path.exists(JAVA_OUT):
 # Recreate the empty out folder
 os.makedirs(JAVA_OUT)
 
+java_files = []
+
+for root, dirs, files in os.walk(JAVA_SRC):
+    for file in files:
+        if file.endswith(".java"):
+            java_files.append(os.path.join(root, file))
+
 subprocess.run([
     "javac",
     "-d", JAVA_OUT,
     "-cp", PY4J_JAR,
-    JAVA_SRC + "/*.java"
-], shell=True)
+    *java_files
+], check=True)
 
 port = launch_gateway(classpath=JAVA_OUT)
 
 gateway = JavaGateway(gateway_parameters=GatewayParameters(port=port))
 
-main = gateway.jvm.Main()
+main = gateway.jvm.chess.Main()
 
 def add_piece(win, piece, x, y):
     piece_type = piece.getName()
@@ -78,19 +85,19 @@ def draw_board(surface):
 
 screen = pygame.display.set_mode((800, 800))
 
-black_pawn_img = pygame.image.load("BlackPawn.png").convert_alpha()
-black_bishop_img = pygame.image.load("BlackBishop.png").convert_alpha()
-black_knight_img = pygame.image.load("BlackKnight.png").convert_alpha()
-black_rook_img = pygame.image.load("BlackRook.png").convert_alpha()
-black_queen_img = pygame.image.load("BlackQueen.png").convert_alpha()
-black_king_img = pygame.image.load("BlackKing.png").convert_alpha()
+black_pawn_img = pygame.image.load("images/BlackPawn.png").convert_alpha()
+black_bishop_img = pygame.image.load("images/BlackBishop.png").convert_alpha()
+black_knight_img = pygame.image.load("images/BlackKnight.png").convert_alpha()
+black_rook_img = pygame.image.load("images/BlackRook.png").convert_alpha()
+black_queen_img = pygame.image.load("images/BlackQueen.png").convert_alpha()
+black_king_img = pygame.image.load("images/BlackKing.png").convert_alpha()
 
-white_pawn_img = pygame.image.load("WhitePawn.png").convert_alpha()
-white_bishop_img = pygame.image.load("WhiteBishop.png").convert_alpha()
-white_knight_img = pygame.image.load("WhiteKnight.png").convert_alpha()
-white_rook_img = pygame.image.load("WhiteRook.png").convert_alpha()
-white_queen_img = pygame.image.load("WhiteQueen.png").convert_alpha()
-white_king_img = pygame.image.load("WhiteKing.png").convert_alpha()
+white_pawn_img = pygame.image.load("images/WhitePawn.png").convert_alpha()
+white_bishop_img = pygame.image.load("images/WhiteBishop.png").convert_alpha()
+white_knight_img = pygame.image.load("images/WhiteKnight.png").convert_alpha()
+white_rook_img = pygame.image.load("images/WhiteRook.png").convert_alpha()
+white_queen_img = pygame.image.load("images/WhiteQueen.png").convert_alpha()
+white_king_img = pygame.image.load("images/WhiteKing.png").convert_alpha()
 
 while True:
 
