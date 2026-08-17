@@ -1,11 +1,13 @@
+import chess.Board;
 import chess.Game;
 import chess.Move;
+
 import java.util.Scanner;
 import minimaxBot.ChessBot;
 
 public class Main{
+    private static Game game = new Game();
     public static void main(String[] args) {
-        Game game = new Game();
         ChessBot chessBot = new ChessBot(game, 4);
         Scanner scanner = new Scanner(System.in);
 
@@ -17,7 +19,7 @@ public class Main{
                 System.out.println(tempMove);
             }
             
-            do {
+            while(true) {
                 try{
                     int fromSquare = scanner.nextInt();
                     int toSquare = scanner.nextInt();
@@ -35,7 +37,7 @@ public class Main{
                     continue;
                 }
 
-            } while(true);
+            } 
 
             game.printBoard();
 
@@ -43,5 +45,9 @@ public class Main{
 
         }
         scanner.close();
+    }
+
+    public static Board getBoard(){
+        return game.getBoard();
     }
 }
