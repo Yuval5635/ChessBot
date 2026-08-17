@@ -18,12 +18,24 @@ public class Main{
             }
             
             do {
+                try{
+                    int fromSquare = scanner.nextInt();
+                    int toSquare = scanner.nextInt();
+                    move = new Move(fromSquare, toSquare);
+                    if(!game.turn(move)){
+                        break;
+                    }
 
-                int fromSquare = scanner.nextInt();
-                int toSquare = scanner.nextInt();
-                move = new Move(fromSquare, toSquare);
+                } catch(Exception e){
+                    System.out.println("Undoing last move");
+                    game.undoTurn();
+                    game.undoTurn();
+                    game.printBoard();
+                    scanner.nextLine(); // Clear the invalid input
+                    continue;
+                }
 
-            } while(game.turn(move));
+            } while(true);
 
             game.printBoard();
 

@@ -24,7 +24,7 @@ public class Game {
         for (int i = 0; i < 64; i++){
             if (this.board.isOccupy(i) && this.board.getSquare(i) instanceof King){
                 if (this.board.getColor(i) == 1) whiteKingAlive = true;
-                else blackKingAlive = true;
+                else if (this.board.getColor(i) == -1) blackKingAlive = true;
             }
         }
 

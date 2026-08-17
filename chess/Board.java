@@ -78,8 +78,12 @@ public class Board {
             if (((King)piece).canCastle(toSquare)){
                 if (toSquare == 2){
                     movePiece(this.board[0], 3);
+                    this.board[3] = this.board[0];
+                    this.board[this.board[0].getSquare()] = null;
                 } else if (toSquare == 6){
                     movePiece(this.board[7], 5);
+                    this.board[5] = this.board[7];
+                    this.board[this.board[7].getSquare()] = null;
                 }
             }
         }

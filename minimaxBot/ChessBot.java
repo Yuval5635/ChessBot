@@ -18,13 +18,17 @@ public class ChessBot{
     public void turn(){
         Move bestMove = null;
         int bestScore = Integer.MAX_VALUE;
-
+        int phase = 0;
         System.out.println(this.game.getAllMoves().length + " Moves:  ");
-        
+        for (int i = 0; i < 64; i++) {
+            if (this.game.getBoard().isOccupy(i)) {
+                phase += getPiecePhaseValue(this.game.getBoard().getSquare(i));
+            }
+        }
         for (Move move : this.game.getAllMoves()){
 
             this.game.turn(move);
-            int score = miniMax(this.maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            int score = miniMax(this.maxDepth + ((24 - phase)/3) * 2, Integer.MIN_VALUE, Integer.MAX_VALUE);
             this.game.undoTurn();
 
             System.out.println("Move:  " + move + "  Score:  " + score);
@@ -41,9 +45,10 @@ public class ChessBot{
     public int miniMax(int depth, int alpha, int beta) {
         
         if (this.game.isWin() != 0) {
-            return -100000 * this.game.isWin(); // Return a large positive or negative score based on who wins
+            // System.out.println("Game Over! Winner: " + (this.game.isWin() == 1 ? "White" : "Black"));
+            return 1000000 * this.game.isWin() * (this.game.isWhiteTurn() ? -1 : 1); // Return a large positive or negative score based on who wins
         }
-        if (depth == 0) {
+        else if (depth == 0) {
             return evaluateBoard();
         }
 
@@ -57,6 +62,9 @@ public class ChessBot{
             this.game.undoTurn();
 
             bestScore = Math.max(bestScore, score);
+            if (score >= 1000000 || score <= -1000000) {
+                bestScore += Math.signum(score) * 50;
+            }
             alpha = Math.max(alpha, score);
 
             if (alpha >= beta) {
@@ -78,7 +86,9 @@ public class ChessBot{
             }
         }
 
-        return mgScore(phase) + egScore(phase);
+        int score = mgScore(phase) + egScore(phase);
+
+        return score * (this.game.isWhiteTurn() ? 1 : -1);
     }
 
     private int getAllPieceValue(){
@@ -109,11 +119,11 @@ public class ChessBot{
         if (! (this.game.getBoard().getSquare(square) instanceof chess.Piece)) return 0;
         Piece piece = (Piece) this.game.getBoard().getSquare(square);
         int color = game.isWhiteTurn() ? piece.getColor() : -piece.getColor();
-        if (piece instanceof chess.Pawn) return 100 * color;
-        if (piece instanceof chess.Knight) return 320 * color;
-        if (piece instanceof chess.Bishop) return 330 * color;
-        if (piece instanceof chess.Rook) return 500 * color;
-        if (piece instanceof chess.Queen) return 900 * color;
+        if (piece instanceof chess.Pawn) return 110 * color;
+        if (piece instanceof chess.Knight) return 352 * color;
+        if (piece instanceof chess.Bishop) return 363 * color;
+        if (piece instanceof chess.Rook) return 550 * color;
+        if (piece instanceof chess.Queen) return 990 * color;
         if (piece instanceof chess.King) return 100000 * color; // Arbitrary high value for the king
         return 0;
     }
@@ -130,7 +140,7 @@ public class ChessBot{
         int score = 0;
         score += getAllPieceValue();
         score += getAllPSTValue(phase);
-        score += getNumMovesValue() * 10;
+        score += getNumMovesValue() * 20;
 
         return (score * phase) / 24;
     }
@@ -139,7 +149,7 @@ public class ChessBot{
         int score = 0;
         score += getAllPieceValue();
         score += getAllPSTValue(phase);
-        score += getNumMovesValue() * 5;
+        score += getNumMovesValue() * 20;
 
         return (score * (24 - phase)) / 24;
     }
