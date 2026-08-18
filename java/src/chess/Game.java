@@ -54,6 +54,10 @@ public class Game {
         return this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? 1 : -1) && Utils.findIndex(this.board.getAllMoves(this.board.getColor(move.fromSquare())), move) != -1;
     }
 
+    public boolean isMoveValid(int fromSquare, int toSquare){
+        return isMoveValid(new Move(fromSquare, toSquare));
+    }
+
     public boolean isWhiteTurn() {
         return this.isWhiteTurn;
     }

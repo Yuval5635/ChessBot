@@ -28,7 +28,7 @@ public class ChessBot{
         for (Move move : this.game.getAllMoves()){
 
             this.game.turn(move);
-            int score = miniMax(this.maxDepth + ((24 - phase)/3) * 2, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            int score = miniMax(this.maxDepth + ((24 - phase)/6) * 2, Integer.MIN_VALUE, Integer.MAX_VALUE);
             this.game.undoTurn();
 
             System.out.println("Move:  " + move + "  Score:  " + score);
