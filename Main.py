@@ -242,20 +242,13 @@ threading.Thread(
 
 while running:
 
-    # -------------------------
     # Pygame events
-    # -------------------------
-
     for event in pygame.event.get():
-
         if event.type == pygame.QUIT:
-
             running = False
 
 
-    # -------------------------
     # Player turn
-    # -------------------------
     if not main.isWin():
         if main.isWhiteTurn():
 
@@ -286,10 +279,8 @@ while running:
             main.botTurn()
 
 
-    # -------------------------
-    # Get board from Java
-    # -------------------------
 
+    # Get board from Java
     board = main.getBoard()
 
 

@@ -105,14 +105,14 @@ public class Board {
         }
         if (piece instanceof King) {
             if (((King) piece).canCastle(toSquare)) {
-                if (toSquare == 2) {
-                    movePiece(getSquare(0), 3);
-                    setSquare(3, getSquare(0));
-                    setSquare(getSquare(0).getSquare(), null);
-                } else if (toSquare == 6) {
-                    movePiece(getSquare(7), 5);
-                    setSquare(5, getSquare(7));
-                    setSquare(getSquare(7).getSquare(), null);
+                if (toSquare == 2 + (piece.getColor() == 1 ? 0 : 56)) {
+                    movePiece(getSquare(0 + (piece.getColor() == 1 ? 0 : 56)), 3 + (piece.getColor() == 1 ? 0 : 56));
+                    setSquare(3 + (piece.getColor() == 1 ? 0 : 56), getSquare(0 + (piece.getColor() == 1 ? 0 : 56)));
+                    setSquare(getSquare(0 + (piece.getColor() == 1 ? 0 : 56)).getSquare(), null);
+                } else if (toSquare == 6 + (piece.getColor() == 1 ? 0 : 56)) {
+                    movePiece(getSquare(7 + (piece.getColor() == 1 ? 0 : 56)), 5 + (piece.getColor() == 1 ? 0 : 56));
+                    setSquare(5 + (piece.getColor() == 1 ? 0 : 56), getSquare(7 + (piece.getColor() == 1 ? 0 : 56)));
+                    setSquare(getSquare(7 + (piece.getColor() == 1 ? 0 : 56)).getSquare(), null);
                 }
             }
         }
