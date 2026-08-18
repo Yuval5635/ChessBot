@@ -70,4 +70,12 @@ public class Main{
     public void undoTurn(){
         game.undoTurn();
     }
+
+    public boolean isWhiteTurn(){
+        return game.isWhiteTurn();
+    }
+
+    public boolean isWin(){
+        return game.isWin() != 0;
+    }
 }
