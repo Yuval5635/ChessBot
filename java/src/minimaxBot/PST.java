@@ -81,6 +81,17 @@ public class PST {
         -50,-30,-30,-30,-30,-30,-30,-50
     };
 
+    private static final int[] OPENING = {
+          0,  0,  0,  0,  0,  0,  0,  0,
+          0,  0,  0,  0,  0,  0,  0,  0,
+         10, 20, 20, 20, 20, 20, 20, 10,
+         20, 20, 20, 20, 20, 20, 20, 20,
+          0,  0,  0,  0,  0,  0,  0,  0,
+          0,  0,  0,  0,  0,  0,  0,  0,
+          0,  0,  0,  0,  0,  0,  0,  0,
+          0,  0,  0,  0,  0,  0,  0,  0
+    };
+
     private static int flipSquare(int square) {
         return square ^ 56;
     }
@@ -89,23 +100,26 @@ public class PST {
         if (piece == null){
             return 0;
         }
+        if (phase == 24){
+            return (int)(1.5 * OPENING[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+        }
         if (piece instanceof chess.Pawn){
-            return PAWN[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())];
+            return (int)(1.5 * PAWN[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Knight){
-            return KNIGHT[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())];
+            return (int)(1.5 * KNIGHT[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Bishop){
-            return BISHOP[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())];
+            return (int)(1.5 * BISHOP[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Rook){
-            return ROOK[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())];
+            return (int)(1.5 * ROOK[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Queen){
-            return QUEEN[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())];
+            return (int)(1.5 * QUEEN[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.King){
-            return phase > 12 ? KING_MG[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())] : KING_EG[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())];
+            return phase > 12 ? (int)(1.5 * KING_MG[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]) : (int)(1.5 * KING_EG[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         return 0;
     }

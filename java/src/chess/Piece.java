@@ -30,13 +30,25 @@ public abstract class Piece {
         this.square = square;
     }
 
+    public boolean isValidSquare(int square){
+        return square < 64 && square >= 0;
+    }
+
+    public boolean isValidSquare(int rowOffset, int colOffset){
+        int row = (this.square / 8) + rowOffset;
+        int col = (this.square % 8) + colOffset;
+        return row < 8 && row >= 0 && col < 8 && col >= 0;
+    }
+
     protected boolean isValidMove(int rowOffset, int colOffset) {
         int row = (this.square / 8) + rowOffset;
         int col = (this.square % 8) + colOffset;
-        return row < 8 && row >= 0 && col < 8 && col >= 0 && ((! this.board.isOccupy(row * 8 + col)) || this.board.getColor(row * 8 + col) != this.color);
+        return isValidSquare(rowOffset, colOffset) && ((! this.board.isOccupy(row * 8 + col)) || this.board.getColor(row * 8 + col) != this.color);
     }
 
-    public abstract Move[] getMoves();
+    public abstract Move[] getValidMoves();
+
+    public abstract Move[] getMovesWithDeffence();
 
     public abstract Piece copy(Board newBoard);
 }

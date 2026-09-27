@@ -7,7 +7,7 @@ public class Knight extends Piece{
     }
 
     @Override
-    public Move[] getMoves() {
+    public Move[] getValidMoves() {
         boolean[] isMoves = new boolean[64];
 
         for (int i = -2; i <= 2; i++) {
@@ -35,6 +35,37 @@ public class Knight extends Piece{
         }
 
         return validMoves;
+    }
+
+    @Override
+    public Move[] getMovesWithDeffence() {
+        boolean[] isMoves = new boolean[64];
+
+        for (int i = -2; i <= 2; i++) {
+            if (i == 0) continue;
+            for (int j = -1; j < 2; j += 2) {
+                if(isValidSquare(i, (3 - Math.abs(i)) * j)){
+                    isMoves[this.square + (i * 8) + ((3 - Math.abs(i)) * j)] = true;
+                }
+            }
+        }
+
+        int numOfMoves = 0;
+        for (boolean isMove : isMoves) {
+            if (isMove) numOfMoves++;
+        }
+
+        Move[] moves = new Move[numOfMoves];
+
+        int indexer = 0;
+        for (int i = 0; i < 64; i++){
+            if(isMoves[i]){
+                moves[indexer] = new Move(this.square, i);
+                indexer++;
+            }
+        }
+
+        return moves;
     }
 
     @Override

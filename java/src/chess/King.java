@@ -10,7 +10,7 @@ public class King extends Piece{
     }
     
     @Override
-    public Move[] getMoves() {
+    public Move[] getValidMoves() {
         boolean[] isMoves = new boolean[64];
 
         for (int i = -1; i <= 1; i++){
@@ -21,17 +21,11 @@ public class King extends Piece{
             }
         }
 
-        if (!this.isMoved){
-            if (this.board.getSquare(0) instanceof Rook && !((Rook)this.board.getSquare(0)).isMoved()){
-                if (!this.board.isOccupy(1) && !this.board.isOccupy(2) && !this.board.isOccupy(3)){
-                    isMoves[2] = true;
-                }
-            }
-            if (this.board.getSquare(7) instanceof Rook && !((Rook)this.board.getSquare(7)).isMoved()){
-                if (!this.board.isOccupy(5) && !this.board.isOccupy(6)){
-                    isMoves[6] = true;
-                }
-            }
+        if (canCastle(2)){
+            isMoves[2] = true;
+        }
+        if (canCastle(6)){
+            isMoves[6] = true;
         }
 
         int numOfValidMoves = 0;
@@ -50,6 +44,43 @@ public class King extends Piece{
         }
 
         return validMoves;
+    }
+
+    @Override
+    public Move[] getMovesWithDeffence() {
+        boolean[] isMoves = new boolean[64];
+
+        for (int i = -1; i <= 1; i++){
+            for (int j = -1; j <= 1; j++){
+                if (isValidSquare(i, j)){
+                    isMoves[this.square + (i * 8) + j] = true;
+                }
+            }
+        }
+
+        if (canCastle(2)){
+            isMoves[2] = true;
+        }
+        if (canCastle(6)){
+            isMoves[6] = true;
+        }
+
+        int numOfMoves = 0;
+        for (boolean isMove : isMoves) {
+            if (isMove) numOfMoves++;
+        }
+
+        Move[] moves = new Move[numOfMoves];
+
+        int indexer = 0;
+        for (int i = 0; i < 64; i++){
+            if(isMoves[i]){
+                moves[indexer] = new Move(this.square, i);
+                indexer++;
+            }
+        }
+
+        return moves;
     }
 
     public boolean canCastle(int toSquare){

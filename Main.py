@@ -214,10 +214,10 @@ def terminal_thread():
     while running:
 
         user_input = input(
-            "Enter your move (e.g., 0204 for moving from square 02 to 04): "
+            "Enter your move: "
         )
 
-        if len(user_input) == 4 and user_input.isdigit():
+        if (len(user_input) == 4 and user_input.isdigit()) or user_input.lower() == "undo":
 
             terminal_input = user_input
 
@@ -253,7 +253,10 @@ while running:
         if main.isWhiteTurn():
 
             if terminal_input is not None:
-
+                if terminal_input.lower() == "undo":
+                    main.undo()
+                    terminal_input = None
+                    continue
                 from_square = int(terminal_input[0:2])
                 to_square = int(terminal_input[2:4])
 

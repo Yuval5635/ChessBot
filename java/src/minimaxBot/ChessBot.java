@@ -20,12 +20,15 @@ public class ChessBot{
         Move bestMove = null;
         bestScore = Integer.MAX_VALUE;
         int phase = 0;
+
         System.out.println(this.game.getAllMoves().length + " Moves:  ");
+
         for (int i = 0; i < 64; i++) {
             if (this.game.getBoard().isOccupy(i)) {
                 phase += getPiecePhaseValue(this.game.getBoard().getSquare(i));
             }
         }
+
         for (Move move : this.game.getAllMoves()){
 
             this.game.turn(move);
@@ -47,7 +50,7 @@ public class ChessBot{
         
         if (this.game.isWin() != 0) {
             // System.out.println("Game Over! Winner: " + (this.game.isWin() == 1 ? "White" : "Black"));
-            return 1000000 * this.game.isWin() * (this.game.isWhiteTurn() ? -1 : 1); // Return a large positive or negative score based on who wins
+            return 1000000 * this.game.isWin() * (this.game.isWhiteTurn() ? 1 : -1); // Return a large positive or negative score based on who wins
         }
         else if (depth == 0) {
             return evaluateBoard();
@@ -57,6 +60,7 @@ public class ChessBot{
         Move[] moves = this.game.getAllMoves();
 
         for (Move move : moves) {
+            // if (depth == 1 && game.getBoard().isOccupy(move.toSquare())) depth++;
             this.game.turn(move);
 
             int score = -miniMax(depth - 1, -beta, -alpha); // Recurse with reduced depth and inverted alpha-beta values
@@ -143,21 +147,19 @@ public class ChessBot{
         for (int i = 0; i < 64; i++) {
             if (this.game.getBoard().isOccupy(i)) {
                 Piece piece = this.game.getBoard().getSquare(i);
-                Move[] moves = piece.getMoves();
+                Move[] moves = piece.getMovesWithDeffence();
                 for (Move move : moves) {
                     if (this.game.getBoard().isOccupy(move.toSquare())) {
                         Piece targetPiece = this.game.getBoard().getSquare(move.toSquare());
-                        if (targetPiece.getColor() != piece.getColor()) {
-                            score++;
+                        if (targetPiece.getColor() == piece.getColor()) {
+                            score += piece.getColor();
                         }
-                    } else{
-                        score++;
                     }
                 }
             }
         }
 
-        return score * (this.game.isWhiteTurn() ? -1 : 1);
+        return score * (this.game.isWhiteTurn() ? 1 : -1);
     }
 
     private int mgScore(int phase) {

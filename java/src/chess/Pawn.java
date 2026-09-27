@@ -7,7 +7,7 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public Move[] getMoves() {
+    public Move[] getValidMoves() {
         boolean[] isMoves = new boolean[64];
 
         int direction = this.color;
@@ -45,6 +45,11 @@ public class Pawn extends Piece{
         }
 
         return validMoves;
+    }
+
+    @Override
+    public Move[] getMovesWithDeffence() {
+        return getValidMoves();
     }
 
     @Override

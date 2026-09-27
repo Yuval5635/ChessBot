@@ -1,6 +1,5 @@
 package chess;
 
-import java.util.Scanner;
 import minimaxBot.ChessBot;
 
 public class Main{

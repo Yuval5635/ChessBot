@@ -76,7 +76,7 @@ public class Board {
         Piece piece = getSquare(move.fromSquare());
         if (piece == null)
             return false;
-        for (Move m : piece.getMoves()) {
+        for (Move m : piece.getValidMoves()) {
             if (m.toSquare() == move.toSquare()) {
 
                 movePiece(piece, move.toSquare());
@@ -124,7 +124,7 @@ public class Board {
 
         for (int i = 0; i < 64; i++) {
             if (this.isOccupy(i) && this.getColor(i) == color) {
-                Move[] pieceMoves = this.getSquare(i).getMoves();
+                Move[] pieceMoves = this.getSquare(i).getValidMoves();
                 for (Move pieceMove : pieceMoves) {
                     allMoves[index] = pieceMove;
                     index++;
