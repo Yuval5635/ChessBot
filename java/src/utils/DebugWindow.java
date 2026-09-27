@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -22,6 +23,10 @@ public class DebugWindow {
 
     private static final BlockingQueue<String> inputQueue =
             new LinkedBlockingQueue<>();
+
+    
+
+    private static final ArrayList<InputListener> listeners = new ArrayList<>();
 
 
     static {
@@ -44,12 +49,19 @@ public class DebugWindow {
             addLog("> " + value);
             
             inputQueue.offer(value);
+            
+            updateListeners(value);
         });
 
         frame.add(new JScrollPane(console), BorderLayout.CENTER);
         frame.add(input, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+    }
+
+
+    public static void addInputListener(InputListener listener) {
+        listeners.add(listener);
     }
 
 
@@ -130,6 +142,13 @@ public class DebugWindow {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             return null;
+        }
+    }
+
+
+    private static void updateListeners(String input) {
+        for (InputListener listener : listeners) {
+            listener.onInput(input);
         }
     }
 
