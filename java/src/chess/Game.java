@@ -1,5 +1,6 @@
 package chess;
 
+import utils.DebugWindow;
 import utils.Utils;
 
 public class Game {
@@ -10,6 +11,7 @@ public class Game {
     public Game(){
         this.isWhiteTurn = true;
         this.board = new Board();
+        DebugWindow.addLog("Game started");
     }
 
     public void resetGame(){
