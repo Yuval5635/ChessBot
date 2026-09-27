@@ -114,10 +114,6 @@ public class Main {
         chessBot.turn();
     }
 
-    public void undoTurn() {
-        game.undoTurn();
-    }
-
     public boolean isWhiteTurn() {
         return game.isWhiteTurn();
     }

@@ -22,7 +22,7 @@ public class ChessBot {
         bestScore = Integer.MAX_VALUE;
         int phase = 0;
 
-        DebugWindow.addLog(this.game.getAllMoves().length + " Moves:  ");
+        // DebugWindow.addLog(this.game.getAllMoves().length + " Moves:  ");
 
         for (int i = 0; i < 64; i++) {
             if (this.game.getBoard().isOccupy(i)) {
@@ -37,7 +37,7 @@ public class ChessBot {
                     Integer.MIN_VALUE, Integer.MAX_VALUE);
             this.game.undoTurn();
 
-            DebugWindow.addLog("Move:  " + move + "  Score:  " + score);
+            // DebugWindow.addLog("Move:  " + move + "  Score:  " + score);
 
             if (score < bestScore) {
                 bestScore = score;

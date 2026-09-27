@@ -9,6 +9,7 @@ import chess.pieces.Pawn;
 import chess.pieces.Piece;
 import chess.pieces.Queen;
 import chess.pieces.Rook;
+import utils.DebugWindow;
 
 public class Board {
 
@@ -112,6 +113,10 @@ public class Board {
 
     public void undoMove() {
         resetBoard();
+        if(moves.isEmpty()){
+            DebugWindow.addLog("No moves to undo.");
+            return;
+        }
         moves.remove(moves.size() - 1);
         for (Move move : moves) {
             movePiece(getSquare(move.fromSquare()), move.toSquare());

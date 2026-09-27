@@ -13,6 +13,13 @@ public class Game {
         this.isWhiteTurn = true;
         this.board = new Board();
         DebugWindow.addLog("Game started");
+        DebugWindow.addInputListener(input -> {
+            if (input.equals("undo 2")) {
+                undoTurn();
+                undoTurn();
+                DebugWindow.addLog("Undid last two moves to get the player's turn back");
+            }
+        });
     }
 
     public void resetGame() {
