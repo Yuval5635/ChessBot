@@ -25,8 +25,8 @@ public class Game {
 
         for (int i = 0; i < 64; i++){
             if (this.board.isOccupy(i) && this.board.getSquare(i) instanceof King){
-                if (this.board.getColor(i) == 1) whiteKingAlive = true;
-                else if (this.board.getColor(i) == -1) blackKingAlive = true;
+                if (this.board.getColor(i) == Color.WHITE) whiteKingAlive = true;
+                else if (this.board.getColor(i) == Color.BLACK) blackKingAlive = true;
             }
         }
 
@@ -53,7 +53,7 @@ public class Game {
     }
 
     private boolean isMoveValid(Move move){
-        return this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? 1 : -1) && Utils.findIndex(this.board.getAllMoves(this.board.getColor(move.fromSquare())), move) != -1;
+        return this.board.isOccupy(move.fromSquare()) && this.board.getColor(move.fromSquare()) == (this.isWhiteTurn ? Color.WHITE : Color.BLACK) && Utils.findIndex(this.board.getAllMoves(this.board.getColor(move.fromSquare())), move) != -1;
     }
 
     public boolean isMoveValid(int fromSquare, int toSquare){
@@ -65,11 +65,11 @@ public class Game {
     }
 
     public int getNumOfMoves(){
-        return this.board.getAllMoves(this.isWhiteTurn ? 1 : -1).length;
+        return this.board.getAllMoves(this.isWhiteTurn ? Color.WHITE : Color.BLACK).length;
     }
 
     public Move[] getAllMoves(){
-        return this.board.getAllMoves(this.isWhiteTurn ? 1 : -1);
+        return this.board.getAllMoves(this.isWhiteTurn ? Color.WHITE : Color.BLACK);
     }
 
     public Board getBoard() {

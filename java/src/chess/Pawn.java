@@ -2,7 +2,7 @@ package chess;
 
 public class Pawn extends Piece{
 
-    public Pawn(int color, int square, Board board, char name) {
+    public Pawn(Color color, int square, Board board, char name) {
         super(color, square, board, name);
     }
 
@@ -10,11 +10,11 @@ public class Pawn extends Piece{
     public Move[] getValidMoves() {
         boolean[] isMoves = new boolean[64];
 
-        int direction = this.color;
+        int direction = this.color.getValue();
 
         if (isValidMove(direction, 0)){
             isMoves[this.square + (direction * 8)] = true;
-            if ((this.square / 8 == 6 && this.color == -1) || (this.square / 8 == 1 && this.color == 1)){
+            if ((this.square / 8 == 6 && this.color == Color.BLACK) || (this.square / 8 == 1 && this.color == Color.WHITE)){
                 if (isValidMove(direction * 2, 0)){
                     isMoves[this.square + (direction * 16)] = true;
                 }

@@ -4,7 +4,7 @@ public class King extends Piece{
     
     boolean isMoved;
 
-    public King(int color, int square, Board board, char name) {
+    public King(Color color, int square, Board board, char name) {
         super(color, square, board, name);
         this.isMoved = false;
     }
@@ -26,6 +26,12 @@ public class King extends Piece{
         }
         if (canCastle(6)){
             isMoves[6] = true;
+        }
+        if (canCastle(58)){
+            isMoves[58] = true;
+        }
+        if (canCastle(62)){
+            isMoves[62] = true;
         }
 
         int numOfValidMoves = 0;
@@ -63,6 +69,12 @@ public class King extends Piece{
         }
         if (canCastle(6)){
             isMoves[6] = true;
+        }
+        if (canCastle(58)){
+            isMoves[58] = true;
+        }
+        if (canCastle(62)){
+            isMoves[62] = true;
         }
 
         int numOfMoves = 0;
@@ -103,6 +115,21 @@ public class King extends Piece{
 
     @Override
     public void moveTo(int square) {
+        if (canCastle(square)){
+            if (this.color == Color.WHITE){
+                if (square == 2){
+                    this.board.movePiece(new Move(0, 3));
+                } else if (square == 6){
+                    this.board.movePiece(new Move(7, 5));
+                }
+            } else {
+                if (square == 58){
+                    this.board.movePiece(new Move(56, 59));
+                } else if (square == 62){
+                    this.board.movePiece(new Move(63, 60));
+                }
+            }
+        }
         super.moveTo(square);
         this.isMoved = true;
     }

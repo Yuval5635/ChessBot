@@ -4,7 +4,7 @@ public class Rook extends Piece{
 
     boolean isMoved;
 
-    public Rook(int color, int square, Board board, char name) {
+    public Rook(Color color, int square, Board board, char name) {
         super(color, square, board, name);
         this.isMoved = false;
     }

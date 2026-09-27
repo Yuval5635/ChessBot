@@ -1,5 +1,6 @@
 package minimaxBot;
 
+import chess.Color;
 import chess.Piece;
 
 public class PST {
@@ -101,25 +102,25 @@ public class PST {
             return 0;
         }
         if (phase == 24){
-            return (int)(1.5 * OPENING[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return (int)(1.5 * OPENING[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Pawn){
-            return (int)(1.5 * PAWN[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return (int)(1.5 * PAWN[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Knight){
-            return (int)(1.5 * KNIGHT[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return (int)(1.5 * KNIGHT[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Bishop){
-            return (int)(1.5 * BISHOP[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return (int)(1.5 * BISHOP[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Rook){
-            return (int)(1.5 * ROOK[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return (int)(1.5 * ROOK[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.Queen){
-            return (int)(1.5 * QUEEN[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return (int)(1.5 * QUEEN[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         if (piece instanceof chess.King){
-            return phase > 12 ? (int)(1.5 * KING_MG[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]) : (int)(1.5 * KING_EG[piece.getColor() == 1 ? piece.getSquare() : flipSquare(piece.getSquare())]);
+            return phase > 12 ? (int)(1.5 * KING_MG[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]) : (int)(1.5 * KING_EG[piece.getColor() == Color.WHITE ? piece.getSquare() : flipSquare(piece.getSquare())]);
         }
         return 0;
     }

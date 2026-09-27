@@ -2,7 +2,7 @@ package chess;
 
 public class Bishop extends Piece{
 
-    public Bishop(int color, int square, Board board, char name) {
+    public Bishop(Color color, int square, Board board, char name) {
         super(color, square, board, name);
     }
     

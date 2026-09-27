@@ -2,12 +2,12 @@ package chess;
 
 public abstract class Piece {
 
-    protected int color;
+    protected Color color;
     protected int square;
     protected Board board;
     protected char name;
 
-    protected Piece(int color, int square, Board board, char name) {
+    protected Piece(Color color, int square, Board board, char name) {
         this.color = color;
         this.square = square;
         this.board = board;
@@ -18,7 +18,7 @@ public abstract class Piece {
         return this.square;
     }
 
-    public int getColor(){
+    public Color getColor(){
         return this.color;
     }
 

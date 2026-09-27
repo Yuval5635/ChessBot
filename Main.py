@@ -203,37 +203,37 @@ def draw_board(surface):
 # =========================
 
 running = True
-terminal_input = None
+# terminal_input = None
 
 
-def terminal_thread():
+# def terminal_thread():
 
-    global terminal_input
-    global running
+#     global terminal_input
+#     global running
 
-    while running:
+#     while running:
 
-        user_input = input(
-            "Enter your move: "
-        )
+#         user_input = input(
+#             "Enter your move: "
+#         )
 
-        if (len(user_input) == 4 and user_input.isdigit()) or user_input.lower() == "undo":
+#         if (len(user_input) == 4 and user_input.isdigit()) or user_input.lower() == "undo":
 
-            terminal_input = user_input
+#             terminal_input = user_input
 
-        else:
+#         else:
 
-            print(
-                "Invalid input. "
-                "Please enter a 4-digit number representing the move."
-            )
+#             print(
+#                 "Invalid input. "
+#                 "Please enter a 4-digit number representing the move."
+#             )
 
 
-# Start terminal thread
-threading.Thread(
-    target=terminal_thread,
-    daemon=True
-).start()
+# # Start terminal thread
+# threading.Thread(
+#     target=terminal_thread,
+#     daemon=True
+# ).start()
 
 
 # =========================
@@ -248,38 +248,39 @@ while running:
             running = False
 
 
-    # Player turn
-    if not main.isWin():
-        if main.isWhiteTurn():
+    # # Player turn
+    # if not main.isWin():
+    #     if main.isWhiteTurn():
 
-            if terminal_input is not None:
-                if terminal_input.lower() == "undo":
-                    main.undo()
-                    terminal_input = None
-                    continue
-                from_square = int(terminal_input[0:2])
-                to_square = int(terminal_input[2:4])
+    #         if terminal_input is not None:
+    #             if terminal_input.lower() == "undo":
+    #                 main.undo()
+    #                 terminal_input = None
+    #                 continue
+    #             from_square = int(terminal_input[0:2])
+    #             to_square = int(terminal_input[2:4])
 
-                if main.isMoveValid(from_square, to_square):
+    #             if main.isMoveValid(from_square, to_square):
 
-                    main.turn(from_square, to_square)
+    #                 main.turn(from_square, to_square)
 
-                else:
+    #             else:
 
-                    print("Invalid move!")
+    #                 print("Invalid move!")
 
-                # Clear the input regardless of whether
-                # the move was valid
-                terminal_input = None
+    #             # Clear the input regardless of whether
+    #             # the move was valid
+    #             terminal_input = None
 
 
-        # -------------------------
-        # Bot turn
-        # -------------------------
+    #     # -------------------------
+    #     # Bot turn
+    #     # -------------------------
 
-        else:
+    #     else:
 
-            main.botTurn()
+    #         main.botTurn()
+    main.update()
 
 
 

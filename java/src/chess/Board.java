@@ -9,42 +9,42 @@ public class Board {
     private ArrayList<Move> moves;
 
     public Board() {
-        this.board = new Piece[] { new Rook(1, 0, this, 'R'), new Knight(1, 1, this, 'N'), new Bishop(1, 2, this, 'B'),
-                new Queen(1, 3, this, 'Q'), new King(1, 4, this, 'K'), new Bishop(1, 5, this, 'B'),
-                new Knight(1, 6, this, 'N'), new Rook(1, 7, this, 'R'),
-                new Pawn(1, 8, this, 'P'), new Pawn(1, 9, this, 'P'), new Pawn(1, 10, this, 'P'),
-                new Pawn(1, 11, this, 'P'), new Pawn(1, 12, this, 'P'), new Pawn(1, 13, this, 'P'),
-                new Pawn(1, 14, this, 'P'), new Pawn(1, 15, this, 'P'),
+        this.board = new Piece[] { new Rook(Color.WHITE, 0, this, 'R'), new Knight(Color.WHITE, 1, this, 'N'), new Bishop(Color.WHITE, 2, this, 'B'),
+                new Queen(Color.WHITE, 3, this, 'Q'), new King(Color.WHITE, 4, this, 'K'), new Bishop(Color.WHITE, 5, this, 'B'),
+                new Knight(Color.WHITE, 6, this, 'N'), new Rook(Color.WHITE, 7, this, 'R'),
+                new Pawn(Color.WHITE, 8, this, 'P'), new Pawn(Color.WHITE, 9, this, 'P'), new Pawn(Color.WHITE, 10, this, 'P'),
+                new Pawn(Color.WHITE, 11, this, 'P'), new Pawn(Color.WHITE, 12, this, 'P'), new Pawn(Color.WHITE, 13, this, 'P'),
+                new Pawn(Color.WHITE, 14, this, 'P'), new Pawn(Color.WHITE, 15, this, 'P'),
                 null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null,
-                new Pawn(-1, 48, this, 'p'), new Pawn(-1, 49, this, 'p'), new Pawn(-1, 50, this, 'p'),
-                new Pawn(-1, 51, this, 'p'), new Pawn(-1, 52, this, 'p'), new Pawn(-1, 53, this, 'p'),
-                new Pawn(-1, 54, this, 'p'), new Pawn(-1, 55, this, 'p'),
-                new Rook(-1, 56, this, 'r'), new Knight(-1, 57, this, 'n'), new Bishop(-1, 58, this, 'b'),
-                new Queen(-1, 59, this, 'q'), new King(-1, 60, this, 'k'), new Bishop(-1, 61, this, 'b'),
-                new Knight(-1, 62, this, 'n'), new Rook(-1, 63, this, 'r') };
+                new Pawn(Color.BLACK, 48, this, 'p'), new Pawn(Color.BLACK, 49, this, 'p'), new Pawn(Color.BLACK, 50, this, 'p'),
+                new Pawn(Color.BLACK, 51, this, 'p'), new Pawn(Color.BLACK, 52, this, 'p'), new Pawn(Color.BLACK, 53, this, 'p'),
+                new Pawn(Color.BLACK, 54, this, 'p'), new Pawn(Color.BLACK, 55, this, 'p'),
+                new Rook(Color.BLACK, 56, this, 'r'), new Knight(Color.BLACK, 57, this, 'n'), new Bishop(Color.BLACK, 58, this, 'b'),
+                new Queen(Color.BLACK, 59, this, 'q'), new King(Color.BLACK, 60, this, 'k'), new Bishop(Color.BLACK, 61, this, 'b'),
+                new Knight(Color.BLACK, 62, this, 'n'), new Rook(Color.BLACK, 63, this, 'r') };
         moves = new ArrayList<Move>();
     }
 
     public void resetBoard() {
-        this.board = new Piece[] { new Rook(1, 0, this, 'R'), new Knight(1, 1, this, 'N'), new Bishop(1, 2, this, 'B'),
-                new Queen(1, 3, this, 'Q'), new King(1, 4, this, 'K'), new Bishop(1, 5, this, 'B'),
-                new Knight(1, 6, this, 'N'), new Rook(1, 7, this, 'R'),
-                new Pawn(1, 8, this, 'P'), new Pawn(1, 9, this, 'P'), new Pawn(1, 10, this, 'P'),
-                new Pawn(1, 11, this, 'P'), new Pawn(1, 12, this, 'P'), new Pawn(1, 13, this, 'P'),
-                new Pawn(1, 14, this, 'P'), new Pawn(1, 15, this, 'P'),
+        this.board = new Piece[] { new Rook(Color.WHITE, 0, this, 'R'), new Knight(Color.WHITE, 1, this, 'N'), new Bishop(Color.WHITE, 2, this, 'B'),
+                new Queen(Color.WHITE, 3, this, 'Q'), new King(Color.WHITE, 4, this, 'K'), new Bishop(Color.WHITE, 5, this, 'B'),
+                new Knight(Color.WHITE, 6, this, 'N'), new Rook(Color.WHITE, 7, this, 'R'),
+                new Pawn(Color.WHITE, 8, this, 'P'), new Pawn(Color.WHITE, 9, this, 'P'), new Pawn(Color.WHITE, 10, this, 'P'),
+                new Pawn(Color.WHITE, 11, this, 'P'), new Pawn(Color.WHITE, 12, this, 'P'), new Pawn(Color.WHITE, 13, this, 'P'),
+                new Pawn(Color.WHITE, 14, this, 'P'), new Pawn(Color.WHITE, 15, this, 'P'),
                 null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null,
-                new Pawn(-1, 48, this, 'p'), new Pawn(-1, 49, this, 'p'), new Pawn(-1, 50, this, 'p'),
-                new Pawn(-1, 51, this, 'p'), new Pawn(-1, 52, this, 'p'), new Pawn(-1, 53, this, 'p'),
-                new Pawn(-1, 54, this, 'p'), new Pawn(-1, 55, this, 'p'),
-                new Rook(-1, 56, this, 'r'), new Knight(-1, 57, this, 'n'), new Bishop(-1, 58, this, 'b'),
-                new Queen(-1, 59, this, 'q'), new King(-1, 60, this, 'k'), new Bishop(-1, 61, this, 'b'),
-                new Knight(-1, 62, this, 'n'), new Rook(-1, 63, this, 'r') };
+                new Pawn(Color.BLACK, 48, this, 'p'), new Pawn(Color.BLACK, 49, this, 'p'), new Pawn(Color.BLACK, 50, this, 'p'),
+                new Pawn(Color.BLACK, 51, this, 'p'), new Pawn(Color.BLACK, 52, this, 'p'), new Pawn(Color.BLACK, 53, this, 'p'),
+                new Pawn(Color.BLACK, 54, this, 'p'), new Pawn(Color.BLACK, 55, this, 'p'),
+                new Rook(Color.BLACK, 56, this, 'r'), new Knight(Color.BLACK, 57, this, 'n'), new Bishop(Color.BLACK, 58, this, 'b'),
+                new Queen(Color.BLACK, 59, this, 'q'), new King(Color.BLACK, 60, this, 'k'), new Bishop(Color.BLACK, 61, this, 'b'),
+                new Knight(Color.BLACK, 62, this, 'n'), new Rook(Color.BLACK, 63, this, 'r') };
     }
 
     public boolean isOccupy(int square) {
@@ -55,7 +55,7 @@ public class Board {
         return isOccupy(y * 8 + x);
     }
 
-    public int getColor(int square) {
+    public Color getColor(int square) {
         return getSquare(square).getColor();
     }
 
@@ -99,26 +99,26 @@ public class Board {
         setSquare(piece.getSquare(), null);
         piece.moveTo(toSquare);
         if (piece instanceof Pawn) {
-            if ((toSquare / 8 == 0 && piece.getColor() == -1) || (toSquare / 8 == 7 && piece.getColor() == 1)) {
-                setSquare(toSquare, new Queen(piece.getColor(), toSquare, this, piece.getColor() == 1 ? 'Q' : 'q'));
+            if ((toSquare / 8 == 0 && piece.getColor() == Color.BLACK) || (toSquare / 8 == 7 && piece.getColor() == Color.WHITE)) {
+                setSquare(toSquare, new Queen(piece.getColor(), toSquare, this, piece.getColor() == Color.WHITE ? 'Q' : 'q'));
             }
         }
         if (piece instanceof King) {
             if (((King) piece).canCastle(toSquare)) {
-                if (toSquare == 2 + (piece.getColor() == 1 ? 0 : 56)) {
-                    movePiece(getSquare(0 + (piece.getColor() == 1 ? 0 : 56)), 3 + (piece.getColor() == 1 ? 0 : 56));
-                    setSquare(3 + (piece.getColor() == 1 ? 0 : 56), getSquare(0 + (piece.getColor() == 1 ? 0 : 56)));
-                    setSquare(getSquare(0 + (piece.getColor() == 1 ? 0 : 56)).getSquare(), null);
-                } else if (toSquare == 6 + (piece.getColor() == 1 ? 0 : 56)) {
-                    movePiece(getSquare(7 + (piece.getColor() == 1 ? 0 : 56)), 5 + (piece.getColor() == 1 ? 0 : 56));
-                    setSquare(5 + (piece.getColor() == 1 ? 0 : 56), getSquare(7 + (piece.getColor() == 1 ? 0 : 56)));
-                    setSquare(getSquare(7 + (piece.getColor() == 1 ? 0 : 56)).getSquare(), null);
+                if (toSquare == 2 + (piece.getColor() == Color.WHITE ? 0 : 56)) {
+                    movePiece(getSquare(0 + (piece.getColor() == Color.WHITE ? 0 : 56)), 3 + (piece.getColor() == Color.WHITE ? 0 : 56));
+                    setSquare(3 + (piece.getColor() == Color.WHITE ? 0 : 56), getSquare(0 + (piece.getColor() == Color.WHITE ? 0 : 56)));
+                    setSquare(getSquare(0 + (piece.getColor() == Color.WHITE ? 0 : 56)).getSquare(), null);
+                } else if (toSquare == 6 + (piece.getColor() == Color.WHITE ? 0 : 56)) {
+                    movePiece(getSquare(7 + (piece.getColor() == Color.WHITE ? 0 : 56)), 5 + (piece.getColor() == Color.WHITE ? 0 : 56));
+                    setSquare(5 + (piece.getColor() == Color.WHITE ? 0 : 56), getSquare(7 + (piece.getColor() == Color.WHITE ? 0 : 56)));
+                    setSquare(getSquare(7 + (piece.getColor() == Color.WHITE ? 0 : 56)).getSquare(), null);
                 }
             }
         }
     }
 
-    public Move[] getAllMoves(int color) {
+    public Move[] getAllMoves(Color color) {
         Move[] allMoves = new Move[4096];
         int index = 0;
 

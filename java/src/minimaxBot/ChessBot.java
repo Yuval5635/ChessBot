@@ -4,6 +4,7 @@ import chess.Board;
 import chess.Game;
 import chess.Move;
 import chess.Piece;
+import utils.DebugWindow;
 
 public class ChessBot{
 
@@ -21,7 +22,7 @@ public class ChessBot{
         bestScore = Integer.MAX_VALUE;
         int phase = 0;
 
-        System.out.println(this.game.getAllMoves().length + " Moves:  ");
+        DebugWindow.addLog(this.game.getAllMoves().length + " Moves:  ");
 
         for (int i = 0; i < 64; i++) {
             if (this.game.getBoard().isOccupy(i)) {
@@ -35,21 +36,21 @@ public class ChessBot{
             int score = miniMax(this.maxDepth + (phase > 10 ? 0 : (((40 - getNumMovesValue())/25) * 2)), Integer.MIN_VALUE, Integer.MAX_VALUE);
             this.game.undoTurn();
 
-            System.out.println("Move:  " + move + "  Score:  " + score);
+            DebugWindow.addLog("Move:  " + move + "  Score:  " + score);
 
             if (score < bestScore){
                 bestScore = score;
                 bestMove = move;
             }
         }
-        System.out.println("Best Move: " + bestMove + " Best Score: " + bestScore);
+        DebugWindow.addLog("Best Move: " + bestMove + " Best Score: " + bestScore);
         this.game.turn(bestMove);
     }
     
     public int miniMax(int depth, int alpha, int beta) {
         
         if (this.game.isWin() != 0) {
-            // System.out.println("Game Over! Winner: " + (this.game.isWin() == 1 ? "White" : "Black"));
+            // DebugWindow.addLog("Game Over! Winner: " + (this.game.isWin() == 1 ? "White" : "Black"));
             return 1000000 * this.game.isWin() * (this.game.isWhiteTurn() ? 1 : -1); // Return a large positive or negative score based on who wins
         }
         else if (depth == 0) {
@@ -123,7 +124,7 @@ public class ChessBot{
     private int getPieceValue(int square) {
         if (! (this.game.getBoard().getSquare(square) instanceof chess.Piece)) return 0;
         Piece piece = (Piece) this.game.getBoard().getSquare(square);
-        int color = game.isWhiteTurn() ? piece.getColor() : -piece.getColor();
+        int color = game.isWhiteTurn() ? piece.getColor().getValue() : -piece.getColor().getValue();
         if (piece instanceof chess.Pawn) return 110 * color;
         if (piece instanceof chess.Knight) return 352 * color;
         if (piece instanceof chess.Bishop) return 363 * color;
@@ -152,7 +153,7 @@ public class ChessBot{
                     if (this.game.getBoard().isOccupy(move.toSquare())) {
                         Piece targetPiece = this.game.getBoard().getSquare(move.toSquare());
                         if (targetPiece.getColor() == piece.getColor()) {
-                            score += piece.getColor();
+                            score += piece.getColor().getValue();
                         }
                     }
                 }
