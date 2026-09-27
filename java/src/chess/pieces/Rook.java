@@ -1,6 +1,10 @@
-package chess;
+package chess.pieces;
 
-public class Rook extends Piece{
+import chess.Board;
+import chess.Color;
+import chess.Move;
+
+public class Rook extends Piece {
 
     boolean isMoved;
 
@@ -10,27 +14,27 @@ public class Rook extends Piece{
     }
 
     @Override
-    public Move[] getValidMoves(){
+    public Move[] getValidMoves() {
         boolean[] isMoves = new boolean[64];
 
-        for (int i = -1; i < 2; i += 2){
-            for (int j = i; true; j += i){
-                if (isValidMove(j, 0)){
+        for (int i = -1; i < 2; i += 2) {
+            for (int j = i; true; j += i) {
+                if (isValidMove(j, 0)) {
                     isMoves[this.square + (j * 8)] = true;
-                    if (this.board.isOccupy(j * 8 + this.square)){
+                    if (this.board.isOccupy(j * 8 + this.square)) {
                         break;
                     }
-                } else{
+                } else {
                     break;
                 }
             }
-            for (int j = i; true; j += i){
-                if (isValidMove(0, j)){
+            for (int j = i; true; j += i) {
+                if (isValidMove(0, j)) {
                     isMoves[this.square + j] = true;
-                    if (this.board.isOccupy(j + this.square)){
+                    if (this.board.isOccupy(j + this.square)) {
                         break;
                     }
-                } else{
+                } else {
                     break;
                 }
             }
@@ -38,14 +42,15 @@ public class Rook extends Piece{
 
         int numOfValidMoves = 0;
         for (boolean isMove : isMoves) {
-            if (isMove) numOfValidMoves++;
+            if (isMove)
+                numOfValidMoves++;
         }
 
         Move[] validMoves = new Move[numOfValidMoves];
 
         int indexer = 0;
-        for (int i = 0; i < 64; i++){
-            if(isMoves[i]){
+        for (int i = 0; i < 64; i++) {
+            if (isMoves[i]) {
                 validMoves[indexer] = new Move(this.square, i);
                 indexer++;
             }
@@ -58,24 +63,24 @@ public class Rook extends Piece{
     public Move[] getMovesWithDeffence() {
         boolean[] isMoves = new boolean[64];
 
-        for (int i = -1; i < 2; i += 2){
-            for (int j = i; true; j += i){
-                if (isValidSquare(j, 0)){
+        for (int i = -1; i < 2; i += 2) {
+            for (int j = i; true; j += i) {
+                if (isValidSquare(j, 0)) {
                     isMoves[this.square + (j * 8)] = true;
-                    if (this.board.isOccupy(j * 8 + this.square)){
+                    if (this.board.isOccupy(j * 8 + this.square)) {
                         break;
                     }
-                } else{
+                } else {
                     break;
                 }
             }
-            for (int j = i; true; j += i){
-                if (isValidSquare(0, j)){
+            for (int j = i; true; j += i) {
+                if (isValidSquare(0, j)) {
                     isMoves[this.square + j] = true;
-                    if (this.board.isOccupy(j + this.square)){
+                    if (this.board.isOccupy(j + this.square)) {
                         break;
                     }
-                } else{
+                } else {
                     break;
                 }
             }
@@ -83,14 +88,15 @@ public class Rook extends Piece{
 
         int numOfMoves = 0;
         for (boolean isMove : isMoves) {
-            if (isMove) numOfMoves++;
+            if (isMove)
+                numOfMoves++;
         }
 
         Move[] moves = new Move[numOfMoves];
 
         int indexer = 0;
-        for (int i = 0; i < 64; i++){
-            if(isMoves[i]){
+        for (int i = 0; i < 64; i++) {
+            if (isMoves[i]) {
                 moves[indexer] = new Move(this.square, i);
                 indexer++;
             }

@@ -21,13 +21,9 @@ public class DebugWindow {
     private static int nextLog = 0;
     private static int logCount = 0;
 
-    private static final BlockingQueue<String> inputQueue =
-            new LinkedBlockingQueue<>();
-
-    
+    private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>();
 
     private static final ArrayList<InputListener> listeners = new ArrayList<>();
-
 
     static {
         clearLogFile();
@@ -47,9 +43,9 @@ public class DebugWindow {
             input.setText("");
 
             addLog("> " + value);
-            
+
             inputQueue.offer(value);
-            
+
             updateListeners(value);
         });
 
@@ -59,11 +55,9 @@ public class DebugWindow {
         frame.setVisible(true);
     }
 
-
     public static void addInputListener(InputListener listener) {
         listeners.add(listener);
     }
-
 
     public static void addLog(String message) {
 
@@ -89,21 +83,17 @@ public class DebugWindow {
             }
 
             console.setCaretPosition(
-                    console.getDocument().getLength()
-            );
+                    console.getDocument().getLength());
         });
     }
-
 
     public static void clearInputs() {
         inputQueue.clear();
     }
 
-
     public static String getInput() {
         return inputQueue.poll();
     }
-
 
     public static String getInput(String prompt) {
         addLog(prompt);
@@ -122,7 +112,6 @@ public class DebugWindow {
         }
     }
 
-
     public static String waitForInput() {
         clearInputs();
         try {
@@ -132,7 +121,6 @@ public class DebugWindow {
             return null;
         }
     }
-
 
     public static String waitForInput(String prompt) {
         addLog(prompt);
@@ -145,17 +133,14 @@ public class DebugWindow {
         }
     }
 
-
     private static void updateListeners(String input) {
         for (InputListener listener : listeners) {
             listener.onInput(input);
         }
     }
 
-
     private static void saveLogToFile(String message) {
-        try (PrintWriter writer =
-                     new PrintWriter(new FileWriter("debug.log", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("debug.log", true))) {
 
             writer.println(message);
 
@@ -164,10 +149,8 @@ public class DebugWindow {
         }
     }
 
-
     private static void clearLogFile() {
-        try (PrintWriter writer =
-                     new PrintWriter("debug.log")) {
+        try (PrintWriter writer = new PrintWriter("debug.log")) {
 
             // Opening the file without append clears it.
 

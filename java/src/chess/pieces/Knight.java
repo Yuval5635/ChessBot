@@ -1,6 +1,10 @@
-package chess;
+package chess.pieces;
 
-public class Knight extends Piece{
+import chess.Board;
+import chess.Color;
+import chess.Move;
+
+public class Knight extends Piece {
 
     public Knight(Color color, int square, Board board, char name) {
         super(color, square, board, name);
@@ -11,9 +15,10 @@ public class Knight extends Piece{
         boolean[] isMoves = new boolean[64];
 
         for (int i = -2; i <= 2; i++) {
-            if (i == 0) continue;
+            if (i == 0)
+                continue;
             for (int j = -1; j < 2; j += 2) {
-                if(isValidMove(i, (3 - Math.abs(i)) * j)){
+                if (isValidMove(i, (3 - Math.abs(i)) * j)) {
                     isMoves[this.square + (i * 8) + ((3 - Math.abs(i)) * j)] = true;
                 }
             }
@@ -21,14 +26,15 @@ public class Knight extends Piece{
 
         int numOfValidMoves = 0;
         for (boolean isMove : isMoves) {
-            if (isMove) numOfValidMoves++;
+            if (isMove)
+                numOfValidMoves++;
         }
 
         Move[] validMoves = new Move[numOfValidMoves];
 
         int indexer = 0;
-        for (int i = 0; i < 64; i++){
-            if(isMoves[i]){
+        for (int i = 0; i < 64; i++) {
+            if (isMoves[i]) {
                 validMoves[indexer] = new Move(this.square, i);
                 indexer++;
             }
@@ -42,9 +48,10 @@ public class Knight extends Piece{
         boolean[] isMoves = new boolean[64];
 
         for (int i = -2; i <= 2; i++) {
-            if (i == 0) continue;
+            if (i == 0)
+                continue;
             for (int j = -1; j < 2; j += 2) {
-                if(isValidSquare(i, (3 - Math.abs(i)) * j)){
+                if (isValidSquare(i, (3 - Math.abs(i)) * j)) {
                     isMoves[this.square + (i * 8) + ((3 - Math.abs(i)) * j)] = true;
                 }
             }
@@ -52,14 +59,15 @@ public class Knight extends Piece{
 
         int numOfMoves = 0;
         for (boolean isMove : isMoves) {
-            if (isMove) numOfMoves++;
+            if (isMove)
+                numOfMoves++;
         }
 
         Move[] moves = new Move[numOfMoves];
 
         int indexer = 0;
-        for (int i = 0; i < 64; i++){
-            if(isMoves[i]){
+        for (int i = 0; i < 64; i++) {
+            if (isMoves[i]) {
                 moves[indexer] = new Move(this.square, i);
                 indexer++;
             }

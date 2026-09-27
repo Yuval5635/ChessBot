@@ -7,7 +7,7 @@ public record Move(int fromSquare, int toSquare) {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "From Square: " + this.fromSquare + " To Square: " + this.toSquare;
     }
 }

@@ -3,21 +3,21 @@ package minimaxBot;
 import chess.Board;
 import chess.Game;
 import chess.Move;
-import chess.Piece;
+import chess.pieces.Piece;
 import utils.DebugWindow;
 
-public class ChessBot{
+public class ChessBot {
 
     private Game game;
     private int maxDepth;
     private int bestScore;
 
-    public ChessBot(Game game, int depth){
+    public ChessBot(Game game, int depth) {
         this.game = game;
         this.maxDepth = depth;
     }
 
-    public void turn(){
+    public void turn() {
         Move bestMove = null;
         bestScore = Integer.MAX_VALUE;
         int phase = 0;
@@ -30,15 +30,16 @@ public class ChessBot{
             }
         }
 
-        for (Move move : this.game.getAllMoves()){
+        for (Move move : this.game.getAllMoves()) {
 
             this.game.turn(move);
-            int score = miniMax(this.maxDepth + (phase > 10 ? 0 : (((40 - getNumMovesValue())/25) * 2)), Integer.MIN_VALUE, Integer.MAX_VALUE);
+            int score = miniMax(this.maxDepth + (phase > 10 ? 0 : (((40 - getNumMovesValue()) / 25) * 2)),
+                    Integer.MIN_VALUE, Integer.MAX_VALUE);
             this.game.undoTurn();
 
             DebugWindow.addLog("Move:  " + move + "  Score:  " + score);
 
-            if (score < bestScore){
+            if (score < bestScore) {
                 bestScore = score;
                 bestMove = move;
             }
@@ -46,14 +47,15 @@ public class ChessBot{
         DebugWindow.addLog("Best Move: " + bestMove + " Best Score: " + bestScore);
         this.game.turn(bestMove);
     }
-    
+
     public int miniMax(int depth, int alpha, int beta) {
-        
+
         if (this.game.isWin() != 0) {
-            // DebugWindow.addLog("Game Over! Winner: " + (this.game.isWin() == 1 ? "White" : "Black"));
-            return 1000000 * this.game.isWin() * (this.game.isWhiteTurn() ? 1 : -1); // Return a large positive or negative score based on who wins
-        }
-        else if (depth == 0) {
+            // DebugWindow.addLog("Game Over! Winner: " + (this.game.isWin() == 1 ? "White"
+            // : "Black"));
+            return 1000000 * this.game.isWin() * (this.game.isWhiteTurn() ? 1 : -1); // Return a large positive or
+                                                                                     // negative score based on who wins
+        } else if (depth == 0) {
             return evaluateBoard();
         }
 
@@ -78,7 +80,7 @@ public class ChessBot{
             }
         }
         // if (Math.abs(bestScore) > 9000){
-        //     bestScore -= bestScore * Math.signum(bestScore);
+        // bestScore -= bestScore * Math.signum(bestScore);
         // }
         return bestScore;
     }
@@ -97,9 +99,9 @@ public class ChessBot{
         return score * (this.game.isWhiteTurn() ? 1 : -1);
     }
 
-    private int getAllPieceValue(){
+    private int getAllPieceValue() {
         int score = 0;
-        
+
         for (int i = 0; i < 64; i++) {
             score += getPieceValue(i);
         }
@@ -107,38 +109,49 @@ public class ChessBot{
         return score;
     }
 
-    private int getAllPSTValue(int phase){
+    private int getAllPSTValue(int phase) {
         int score = 0;
 
-        for (int i = 0; i < 64; i++){
+        for (int i = 0; i < 64; i++) {
             score += PST.getPSTValue(game.getBoard().getSquare(i), phase) * (this.game.isWhiteTurn() ? -1 : 1);
         }
 
         return score;
     }
 
-    private int getNumMovesValue(){
+    private int getNumMovesValue() {
         return this.game.getAllMoves().length * (this.game.isWhiteTurn() ? -1 : 1);
     }
 
     private int getPieceValue(int square) {
-        if (! (this.game.getBoard().getSquare(square) instanceof chess.Piece)) return 0;
+        if (!(this.game.getBoard().getSquare(square) instanceof chess.pieces.Piece))
+            return 0;
         Piece piece = (Piece) this.game.getBoard().getSquare(square);
         int color = game.isWhiteTurn() ? piece.getColor().getValue() : -piece.getColor().getValue();
-        if (piece instanceof chess.Pawn) return 110 * color;
-        if (piece instanceof chess.Knight) return 352 * color;
-        if (piece instanceof chess.Bishop) return 363 * color;
-        if (piece instanceof chess.Rook) return 550 * color;
-        if (piece instanceof chess.Queen) return 990 * color;
-        if (piece instanceof chess.King) return 100000 * color; // Arbitrary high value for the king
+        if (piece instanceof chess.pieces.Pawn)
+            return 110 * color;
+        if (piece instanceof chess.pieces.Knight)
+            return 352 * color;
+        if (piece instanceof chess.pieces.Bishop)
+            return 363 * color;
+        if (piece instanceof chess.pieces.Rook)
+            return 550 * color;
+        if (piece instanceof chess.pieces.Queen)
+            return 990 * color;
+        if (piece instanceof chess.pieces.King)
+            return 100000 * color; // Arbitrary high value for the king
         return 0;
     }
 
     private int getPiecePhaseValue(Object piece) {
-        if (piece instanceof chess.Knight) return 1;
-        if (piece instanceof chess.Bishop) return 1;
-        if (piece instanceof chess.Rook) return 2;
-        if (piece instanceof chess.Queen) return 4;
+        if (piece instanceof chess.pieces.Knight)
+            return 1;
+        if (piece instanceof chess.pieces.Bishop)
+            return 1;
+        if (piece instanceof chess.pieces.Rook)
+            return 2;
+        if (piece instanceof chess.pieces.Queen)
+            return 4;
         return 0;
     }
 

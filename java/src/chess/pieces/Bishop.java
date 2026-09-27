@@ -1,21 +1,25 @@
-package chess;
+package chess.pieces;
 
-public class Bishop extends Piece{
+import chess.Board;
+import chess.Color;
+import chess.Move;
+
+public class Bishop extends Piece {
 
     public Bishop(Color color, int square, Board board, char name) {
         super(color, square, board, name);
     }
-    
+
     @Override
     public Move[] getValidMoves() {
         boolean[] isMoves = new boolean[64];
 
-        for (int i = -1; i <= 1; i+=2) {
-            for (int j = -1; j <= 1; j+=2) {
+        for (int i = -1; i <= 1; i += 2) {
+            for (int j = -1; j <= 1; j += 2) {
                 for (int k = 1; true; k++) {
                     if (isValidMove(i * k, j * k)) {
                         isMoves[this.square + ((i * 8) + j) * k] = true;
-                        if (this.board.isOccupy(this.square + ((i * 8) + j) * k)){
+                        if (this.board.isOccupy(this.square + ((i * 8) + j) * k)) {
                             break;
                         }
                     } else {
@@ -27,14 +31,15 @@ public class Bishop extends Piece{
 
         int numOfValidMoves = 0;
         for (boolean isMove : isMoves) {
-            if (isMove) numOfValidMoves++;
+            if (isMove)
+                numOfValidMoves++;
         }
 
         Move[] validMoves = new Move[numOfValidMoves];
 
         int indexer = 0;
-        for (int i = 0; i < 64; i++){
-            if(isMoves[i]){
+        for (int i = 0; i < 64; i++) {
+            if (isMoves[i]) {
                 validMoves[indexer] = new Move(this.square, i);
                 indexer++;
             }
@@ -47,12 +52,12 @@ public class Bishop extends Piece{
     public Move[] getMovesWithDeffence() {
         boolean[] isMoves = new boolean[64];
 
-        for (int i = -1; i <= 1; i+=2) {
-            for (int j = -1; j <= 1; j+=2) {
+        for (int i = -1; i <= 1; i += 2) {
+            for (int j = -1; j <= 1; j += 2) {
                 for (int k = 1; true; k++) {
                     if (isValidSquare(i * k, j * k)) {
                         isMoves[this.square + ((i * 8) + j) * k] = true;
-                        if (this.board.isOccupy(this.square + ((i * 8) + j) * k)){
+                        if (this.board.isOccupy(this.square + ((i * 8) + j) * k)) {
                             break;
                         }
                     } else {
@@ -64,14 +69,15 @@ public class Bishop extends Piece{
 
         int numOfMoves = 0;
         for (boolean isMove : isMoves) {
-            if (isMove) numOfMoves++;
+            if (isMove)
+                numOfMoves++;
         }
 
         Move[] moves = new Move[numOfMoves];
 
         int indexer = 0;
-        for (int i = 0; i < 64; i++){
-            if(isMoves[i]){
+        for (int i = 0; i < 64; i++) {
+            if (isMoves[i]) {
                 moves[indexer] = new Move(this.square, i);
                 indexer++;
             }
