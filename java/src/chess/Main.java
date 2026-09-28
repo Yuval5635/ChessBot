@@ -121,8 +121,4 @@ public class Main {
     public boolean isWin() {
         return game.isWin() != 0;
     }
-
-    public int getBestScore() {
-        return chessBot.getBestScore();
-    }
 }

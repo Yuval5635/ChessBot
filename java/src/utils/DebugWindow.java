@@ -150,7 +150,8 @@ public class DebugWindow {
     }
 
     private static void clearLogFile() {
-        try (PrintWriter writer = new PrintWriter("debug.log")) {
+        try (@SuppressWarnings("unused")
+        PrintWriter writer = new PrintWriter("debug.log")) {
 
             // Opening the file without append clears it.
 
