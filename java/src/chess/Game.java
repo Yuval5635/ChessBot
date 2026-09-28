@@ -20,6 +20,12 @@ public class Game {
                 DebugWindow.addLog("Undid last two moves to get the player's turn back");
             }
         });
+        DebugWindow.addInputListener(input -> {
+            if(input.equals("reset")){
+                resetGame();
+                DebugWindow.addLog("Game reset");
+            }
+        });
     }
 
     public void resetGame() {
