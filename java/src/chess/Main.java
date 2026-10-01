@@ -57,32 +57,31 @@ public class Main {
     }
 
     public void update() {
-        if (!isWin()) {
-            if (isWhiteTurn()) {
-                String playerMove = DebugWindow.getInput();
-                if (isMoveValid(playerMove)) {
-                    String[] parts = playerMove.split(" ");
-                    if (parts.length == 2) {
-                        try {
-                            int fromSquare = Integer.parseInt(parts[0]);
-                            int toSquare = Integer.parseInt(parts[1]);
-                            DebugWindow.addLog("Player moved: " + fromSquare + " to " + toSquare);
-                            if (turn(fromSquare, toSquare)) {
-                                DebugWindow.addLog("Player wins!");
-                            }
-                        } catch (NumberFormatException e) {
-                            DebugWindow.addLog("Invalid input format. Please enter two integers separated by a space.");
+        if (!isWin() && isWhiteTurn()) {
+            String playerMove = DebugWindow.getInput();
+            if (isMoveValid(playerMove)) {
+                String[] parts = playerMove.split(" ");
+                if (parts.length == 2) {
+                    try {
+                        int fromSquare = Integer.parseInt(parts[0]);
+                        int toSquare = Integer.parseInt(parts[1]);
+                        DebugWindow.addLog("Player moved: " + fromSquare + " to " + toSquare);
+                        if (turn(fromSquare, toSquare)) {
+                            DebugWindow.addLog("Player wins!");
                         }
-                    } else {
+                    } catch (NumberFormatException e) {
                         DebugWindow.addLog("Invalid input format. Please enter two integers separated by a space.");
                     }
-                } else if (playerMove != null && !playerMove.trim().isEmpty()) {
+                } else {
                     DebugWindow.addLog("Invalid input format. Please enter two integers separated by a space.");
                 }
-            } else {
-                botTurn();
+            } else if (playerMove != null && !playerMove.trim().isEmpty()) {
+                DebugWindow.addLog("Invalid input format. Please enter two integers separated by a space.");
             }
+        } else {
+            botTurn();
         }
+    
     }
 
     public boolean isMoveValid(String moveStr) {
